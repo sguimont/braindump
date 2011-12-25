@@ -38,6 +38,7 @@ class BootStrap {
 			println "Update Admin Account"
 			adminAccount.addToAuthorities(userRole)
 			adminAccount.addToAuthorities(adminRole)
+			adminAccount.password = springSecurityService.encodePassword("salut99","admin")
 			adminAccount.save()
 		}
 	}

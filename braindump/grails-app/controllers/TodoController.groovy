@@ -1,5 +1,7 @@
 import grails.plugins.springsecurity.Secured
 
+import java.text.SimpleDateFormat
+
 import com.mushcorp.lt.artefact.Todo
 
 
@@ -13,6 +15,9 @@ class TodoController {
     def create() {
         Todo todo = new Todo()
         todo.properties = params
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm")
+		todo.reminder = dateFormat.parse(params.reminderDateTime)    
 
 		for (tag in params.list('tag')) {
 			if(tag.trim()) {
