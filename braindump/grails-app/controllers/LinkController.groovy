@@ -13,7 +13,9 @@ class LinkController {
 		link.properties = params
 
 		for (tag in params.list('tag')) {
-			link.tags.add(tag)
+			if(tag.trim()) {
+				link.tags.add(tag.trim())
+			}
 		}
 
 		if(link.save()) {

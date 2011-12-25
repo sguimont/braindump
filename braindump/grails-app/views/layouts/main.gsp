@@ -8,7 +8,7 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-	<r:require modules="bootstrap, jquery" />
+	<r:require modules="application, bootstrap, jquery, jquery-ui" />
 	<r:layoutResources />
 	<style type="text/css">
 		td.flag {
@@ -140,6 +140,6 @@
       </footer>
 
     </div>
-
+	<r:layoutResources />
   </body>
 </html>

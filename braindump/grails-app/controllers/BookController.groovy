@@ -14,7 +14,9 @@ class BookController {
         book.properties = params
 
 		for (tag in params.list('tag')) {
-			book.tags.add(tag)
+			if(tag.trim()) {
+				book.tags.add(tag.trim())
+			}
 		}
 
 		if (book.save()) {

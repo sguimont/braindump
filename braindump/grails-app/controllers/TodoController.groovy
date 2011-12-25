@@ -15,7 +15,9 @@ class TodoController {
         todo.properties = params
 
 		for (tag in params.list('tag')) {
-			todo.tags.add(tag)
+			if(tag.trim()) {
+				todo.tags.add(tag.trim())
+			}
 		}
 
 		if (todo.save()) {

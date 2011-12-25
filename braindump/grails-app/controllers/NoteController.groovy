@@ -13,7 +13,9 @@ class NoteController {
 		note.properties = params
 
 		for (tag in params.list('tag')) {
-			note.tags.add(tag)
+			if(tag.trim()) {
+				note.tags.add(tag.trim())
+			}
 		}
 		
 		if(note.save()) {

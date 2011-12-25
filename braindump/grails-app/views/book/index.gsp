@@ -9,7 +9,7 @@
 		</jq:jquery>
 	</head>
 	<body>
-		<h3>Link</h3>
+		<h3>Book</h3>
 		<g:form action="create" method="POST">
             <fieldset>
                 <div class="clearfix">
