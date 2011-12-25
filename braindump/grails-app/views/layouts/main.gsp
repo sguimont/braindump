@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-	<title><g:layoutTitle default="Grails" /></title>
+	<title><g:layoutTitle default="Brain Dump" /></title>
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -75,7 +75,7 @@
     <div class="topbar">
       <div class="fill">
         <div class="container">
-          <g:link controller="home" class="brand">Little Thought</g:link>
+          <g:link controller="home" class="brand">Brain Dump</g:link>
           <ul class="nav">
             <li id="homeMenu"><g:link controller="home"><g:message code="default.home.label"/></g:link></li>
           <sec:ifLoggedIn>
@@ -130,7 +130,7 @@
            	<g:layoutBody />
           </div>
           <div class="span4">
-            <h3>Recent Activities</h3>
+            <h3></h3>
           </div>
         </div>
       </div>

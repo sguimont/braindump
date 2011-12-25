@@ -6,27 +6,39 @@ import com.mushcorp.lt.security.Role
 class BootStrap {
 
 	def springSecurityService
-	
+
 	def init = { servletContext ->
-		String VCAP_SERVICES = System.getenv('VCAP_SERVICES')
-		println "VCAP_SERVICES: ${System.getenv('VCAP_SERVICES')}"
-	  
-	  String.metaClass.intro = {len ->
+		String.metaClass.intro = {len ->
 			return StringUtils.abbreviate(delegate, len) ?: ''
 		}
 		GString.metaClass.intro = {len ->
 			return StringUtils.abbreviate(delegate.toString(), len)
 		}
 
-		println "Check Role"
-		if(!Role.count()) {
+		println "Check User Role"
+		if(!Role.findByAuthority('ROLE_USER')) {
+			println "Create User Role"
+			new Role(authority: "ROLE_USER").save()
+		}
+		println "Check Admin Role"
+		if(!Role.findByAuthority('ROLE_ADMIN')) {
+			println "Create Admin Role"
 			new Role(authority: "ROLE_ADMIN").save()
 		}
 
-		println "Check Account"
-		if(!Account.findByUsername('admin')) {
-			def adminRole = Role.findByAuthority('ROLE_ADMIN')
-			new Account(firstName:"admin", lastName:"admin", username:"admin", password:springSecurityService.encodePassword("admin","admin"), enabled:true, accountExpired:false, accountLocked:false, passwordExpired:false, authorities:[adminRole]).save()
+		println "Check Admin Account"
+		def userRole = Role.findByAuthority('ROLE_USER')
+		def adminRole = Role.findByAuthority('ROLE_ADMIN')
+		def adminAccount = Account.findByUsername('admin')
+		if(!adminAccount) {
+			println "Create Admin Account"
+			new Account(firstName:"admin", lastName:"admin", username:"admin", password:springSecurityService.encodePassword("admin","admin"), enabled:true, accountExpired:false, accountLocked:false, passwordExpired:false, authorities:[userRole, adminRole]).save()
+		}
+		else {
+			println "Update Admin Account"
+			adminAccount.addToAuthorities(userRole)
+			adminAccount.addToAuthorities(adminRole)
+			adminAccount.save()
 		}
 	}
 

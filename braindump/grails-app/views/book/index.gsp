@@ -20,6 +20,15 @@
                     <label for='url'><g:message code="book.url.label"/></label>
                     <div class="input"><g:textField class="xlarge" name="bookUrl" maxlength="255" /></div>
                 </div>
+                <div class="clearfix">
+                    <label for='tag'><g:message code="book.tags.label"/></label>
+                    <div class="input">
+	                    <g:textField name="tag" class="small" />
+	                    <g:textField name="tag" class="small" />
+	                    <g:textField name="tag" class="small" />
+	                    <g:textField name="tag" class="small" />
+                   </div>
+                </div>
                 <g:submitButton class="btn small primary" name="create" value="Create" />
             </fieldset>
 		</g:form>
@@ -27,7 +36,7 @@
 		<g:each in="${recentBooks}" var="book">
 		<tr>
             <td class="flag"><app:isNew date="${book.lastUpdated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew></td>
-			<td><g:link url="${book.bookUrl}" target="_blank">${book.title}</g:link></td>
+			<td><g:link url="${book.bookUrl}" target="_blank">${book.title}</g:link><g:if test="${book.tags}"><br/><g:each var="tag" in="${book.tags}"><span class="label">${tag}</span>&nbsp;</g:each></g:if></td>
             <td style="color: #AAA; text-align: right; white-space: nowrap;"><g:formatDate date="${book.lastUpdated}" format="yyyy-MM-dd HH:mm:ss" /><br/><prettytime:display date="${book.lastUpdated}" /></td>
 		</tr>
 		</g:each>

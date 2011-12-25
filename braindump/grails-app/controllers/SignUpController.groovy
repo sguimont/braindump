@@ -1,6 +1,10 @@
+import grails.plugins.springsecurity.Secured
+
 import com.mushcorp.lt.security.Account
 
 
+// NOTE: UNTIL I'M SURE TO OPEN TO PEOPLE
+@Secured(["hasRole('ROLE_USER')"])
 class SignUpController {
 
 	def index() {

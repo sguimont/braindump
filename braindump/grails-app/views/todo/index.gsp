@@ -24,14 +24,23 @@
                     <label for='url'><g:message code="todo.date.label"/></label>
                     <div class="input"><g:datePicker name="reminder" /></div>
                 </div>
+                <div class="clearfix">
+                    <label for='tag'><g:message code="todo.tags.label"/></label>
+                    <div class="input">
+	                    <g:textField name="tag" class="small" />
+	                    <g:textField name="tag" class="small" />
+	                    <g:textField name="tag" class="small" />
+	                    <g:textField name="tag" class="small" />
+                   </div>
+                </div>
                 <g:submitButton class="btn small primary" name="create" value="Create" />
             </fieldset>
 		</g:form>
 		<table class="condensed-table zebra-striped recentList">
 		<g:each in="${recentTodos}" var="todo">
-		<tr>
+		<tr><!-- FIXME (SG) : Translate the toto representation  -->
             <td class="flag"><app:isNew date="${todo.lastUpdated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew></td>
-            <td>${todo.todo}<g:if test="${todo.reminder}"> at <g:formatDate date="${todo.reminder}" format="yyyy-MM-dd HH:mm" /> in <prettytime:display date="${todo.reminder}" /></g:if></td>
+            <td>${todo.todo}<g:if test="${todo.reminder}"> at <g:formatDate date="${todo.reminder}" format="yyyy-MM-dd HH:mm" /> in <prettytime:display date="${todo.reminder}" /></g:if><g:if test="${todo.tags}"><br/><g:each var="tag" in="${todo.tags}"><span class="label">${tag}</span>&nbsp;</g:each></g:if></td>
             <td style="color: #AAA; text-align: right; white-space: nowrap;"><g:formatDate date="${todo.lastUpdated}" format="yyyy-MM-dd HH:mm:ss" /><br/><prettytime:display date="${todo.lastUpdated}" /></td>
 		</tr>
 		</g:each>

@@ -1,7 +1,10 @@
+import grails.plugins.springsecurity.Secured
+
 import com.mushcorp.lt.artefact.Todo
 
-class TodoController {
 
+@Secured(["hasRole('ROLE_USER')"])
+class TodoController {
 
     def index() {
         render(view: "index", model: [recentTodos: Todo.collection.find().sort('dateCreated': -1).limit(10)])
@@ -11,7 +14,11 @@ class TodoController {
         Todo todo = new Todo()
         todo.properties = params
 
-        if (todo.save()) {
+		for (tag in params.list('tag')) {
+			todo.tags.add(tag)
+		}
+
+		if (todo.save()) {
             flash.info = "Succesfull created the artefact"
             return redirect(action: "index")
         }

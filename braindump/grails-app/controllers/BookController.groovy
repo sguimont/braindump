@@ -1,5 +1,8 @@
+import grails.plugins.springsecurity.Secured
+
 import com.mushcorp.lt.artefact.Book
 
+@Secured(["hasRole('ROLE_USER')"])
 class BookController {
 
     def index() {
@@ -10,7 +13,11 @@ class BookController {
         Book book = new Book()
         book.properties = params
 
-        if (book.save()) {
+		for (tag in params.list('tag')) {
+			book.tags.add(tag)
+		}
+
+		if (book.save()) {
             flash.info = "Succesfull created the artefact"
             return redirect(action: "index")
         }

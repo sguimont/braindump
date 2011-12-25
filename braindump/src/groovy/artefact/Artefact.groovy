@@ -6,8 +6,8 @@ abstract class Artefact {
 	ObjectId id
 
 	String notes
-	List<String> tags
-	List<Comment> comments
+	List<String> tags = new ArrayList<String>()
+	List<Comment> comments = new ArrayList<Comment>()
 
 	Date dateCreated
 	Date lastUpdated
