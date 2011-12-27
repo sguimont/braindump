@@ -29,7 +29,7 @@
 	                </div>
                 </div>
                 <g:submitButton class="btn small primary" name="save" value="${message(code:'default.button.update.label')}" />
-                <g:link class="btn small" name="cancel" controller="note"><g:message code="default.button.cancel.label"/></g:link>
+                <g:link class="btn small" name="cancel" controller="todo"><g:message code="default.button.cancel.label"/></g:link>
             </fieldset>
 		</g:form>
 	</body>

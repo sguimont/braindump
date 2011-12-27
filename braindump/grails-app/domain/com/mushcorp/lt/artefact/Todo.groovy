@@ -7,7 +7,8 @@ class Todo extends Artefact {
     String todo
     Date reminder
     Date toComplete
-	boolean done
+	
+	//boolean done
 
 	String to
 
