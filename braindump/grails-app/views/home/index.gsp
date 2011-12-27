@@ -59,20 +59,6 @@
 	        </tr>
 	        </g:each>
 	        </table>
-	        <h3>Tags</h3>
-	        <div>
-			 <canvas width="300px" height="300px" id="myCanvas">
-			  <p>In Internet Explorer versions up to 8, things inside the canvas are inaccessible!</p>
-			 </canvas>
-			 
-			 <div id="tags">
-			  <ul>
-		        <g:each var="tag" in="${tags}">
-	        		<li><a href="#" style="font-size: <g:formatNumber number="${tag.value.count}" maxFractionDigits="0"/>ex" data-weight="<g:formatNumber number="${tag.value.count}" maxFractionDigits="0"/>">${tag._id}</a></li>
-		        </g:each>
-			  </ul>
-			 </div>
-	        </div>
  	    </sec:ifLoggedIn>
 	</body>
 </html>

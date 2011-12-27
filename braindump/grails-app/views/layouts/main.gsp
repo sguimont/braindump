@@ -131,7 +131,7 @@
            	<g:layoutBody />
           </div>
           <div class="span4">
-            <h3></h3>
+			<g:include controller="home" action="tags" />            
           </div>
         </div>
       </div>
