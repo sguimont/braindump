@@ -88,6 +88,7 @@
             <li id="linkMenu"><g:link controller="link"><g:message code="default.links.label"/></g:link></li>
             <li id="bookMenu"><g:link controller="book"><g:message code="default.books.label"/></g:link></li>
             <li id="todoMenu"><g:link controller="todo"><g:message code="default.todos.label"/></g:link></li>
+            <li id="contactMenu"><g:link controller="contact"><g:message code="default.contacts.label"/></g:link></li>
           </sec:ifLoggedIn>
           </ul>
           <sec:ifLoggedIn>

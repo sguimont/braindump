@@ -53,6 +53,16 @@
 	        </tr>
 	        </g:each>
 	        </table>
+	        <h3><g:message code="contact.latest"/></h3>
+	        <table class="condensed-table zebra-striped recentList">
+	        <g:each in="${recentContacts}" var="contact">
+	        <tr>
+	            <td class="flag"><app:isNew date="${contact.lastUpdated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew></td>
+	            <td>${contact.name}</td>
+	            <td style="color: #AAA; text-align: right; white-space: nowrap;"><prettytime:display date="${contact.lastUpdated}" /></td>
+	        </tr>
+	        </g:each>
+	        </table>
  	    </sec:ifLoggedIn>
 	</body>
 </html>

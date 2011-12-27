@@ -1,4 +1,5 @@
 import com.mushcorp.lt.artefact.Book
+import com.mushcorp.lt.artefact.Contact
 import com.mushcorp.lt.artefact.Link
 import com.mushcorp.lt.artefact.Note
 import com.mushcorp.lt.artefact.TagStatistics
@@ -17,7 +18,8 @@ class HomeController {
 						recentNotes: Note.collection.find().sort('dateCreated' : -1).limit(5),
 						recentLinks: Link.collection.find().sort('dateCreated' : -1).limit(5),
 						recentBooks: Book.collection.find().sort('dateCreated' : -1).limit(5),
-						recentTodos: Todo.collection.find().sort('dateCreated' : -1).limit(5)
+						recentTodos: Todo.collection.find().sort('dateCreated' : -1).limit(5),
+						recentContacts: Contact.collection.find().sort('dateCreated' : -1).limit(5)
 					])
 		}
 		else {
@@ -32,6 +34,7 @@ class HomeController {
 						recentLinks: Link.collection.find(["tags" : params.tag]).sort('dateCreated' : -1),
 						recentBooks: Book.collection.find(["tags" : params.tag]).sort('dateCreated' : -1),
 						recentTodos: Todo.collection.find(["tags" : params.tag]).sort('dateCreated' : -1),
+						recentContacts: Contact.collection.find(["tags" : params.tag]).sort('dateCreated' : -1),
 						tag: params.tag
 					])
 		}

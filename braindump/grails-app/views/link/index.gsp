@@ -21,6 +21,10 @@
                     <div class="input"><g:textField class="xlarge" name="url" maxlength="255" /></div>
                 </div>
                 <div class="clearfix">
+                    <label for='url'><g:message code="link.notes.label"/></label>
+                    <div class="input"><g:textArea class="span7" name="notes" cols="50" rows="5" /></div>
+                </div>
+                <div class="clearfix">
                     <label for='tag'><g:message code="link.tags.label"/></label>
                     <div class="input">
 	                    <g:textField name="tag" class="small" />
