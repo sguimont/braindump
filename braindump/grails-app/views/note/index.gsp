@@ -13,15 +13,19 @@
 		<g:form action="create" method="POST">
             <fieldset>
                 <div class="clearfix">
-                    <g:textArea class="span8" name="notes" cols="50" rows="5" />
+                    <label for='notes'><g:message code="note.notes.label"/></label>
+                    <div class="input"><g:textArea class="span7" name="notes" cols="50" rows="5" /></div>
                 </div>
                 <div class="clearfix">
-                    <g:textField name="tag" class="small" />
-                    <g:textField name="tag" class="small" />
-                    <g:textField name="tag" class="small" />
-                    <g:textField name="tag" class="small" />
+                    <label for='tag'><g:message code="note.tags.label"/></label>
+                    <div class="input">
+	                    <g:textField name="tag" class="small" />
+	                    <g:textField name="tag" class="small" />
+	                    <g:textField name="tag" class="small" />
+	                    <g:textField name="tag" class="small" />
+	                </div>
                 </div>
-                <g:submitButton class="btn small primary" name="create" value="Create" />
+                <g:submitButton class="btn small primary" name="create" value="${message(code:'default.button.create.label')}" />
             </fieldset>
 		</g:form>
 		<table class="condensed-table zebra-striped recentList">
