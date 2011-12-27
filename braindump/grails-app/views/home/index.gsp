@@ -6,15 +6,6 @@
 		<jq:jquery>
 			 $("#homeMenu").addClass("active")
 			 $("#pageHeader").html("<g:message code="home.quote" encodeAs="JavaScript"/>")
-
-			 var gradient = {
-				 0:    '#f00', // red
-				 0.33: '#ff0', // yellow
-				 0.66: '#0f0', // green
-				 1:    '#00f'  // blue
-				};
-			 
-			 $("#myCanvas").tagcanvas({weight: true, weightMode:'both', weightFrom: 'data-weight', weightSize: 15.0, weightGradient : gradient},'tags') 
 		</jq:jquery>
 	</head>
 	<body>

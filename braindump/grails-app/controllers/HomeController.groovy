@@ -28,10 +28,10 @@ class HomeController {
 	def search() {
 		if(springSecurityService.isLoggedIn()) {
 			render(view:"index", model: [
-						recentNotes: Note.collection.find(["tags" : params.tag]).sort('dateCreated' : -1).limit(5),
-						recentLinks: Link.collection.find(["tags" : params.tag]).sort('dateCreated' : -1).limit(5),
-						recentBooks: Book.collection.find(["tags" : params.tag]).sort('dateCreated' : -1).limit(5),
-						recentTodos: Todo.collection.find(["tags" : params.tag]).sort('dateCreated' : -1).limit(5)
+						recentNotes: Note.collection.find(["tags" : params.tag]).sort('dateCreated' : -1),
+						recentLinks: Link.collection.find(["tags" : params.tag]).sort('dateCreated' : -1),
+						recentBooks: Book.collection.find(["tags" : params.tag]).sort('dateCreated' : -1),
+						recentTodos: Todo.collection.find(["tags" : params.tag]).sort('dateCreated' : -1)
 					])
 		}
 		else {

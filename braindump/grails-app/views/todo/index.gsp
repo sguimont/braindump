@@ -13,7 +13,7 @@
 		</jq:jquery>
 	</head>
 	<body>
-		<h3>Todo</h3>
+		<h3><g:message code="todo.title" /></h3>
 		<g:form action="create" method="POST">
             <fieldset>
                 <div class="clearfix">
