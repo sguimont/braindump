@@ -70,6 +70,10 @@
       .topbar .btn {
         border: 0;
       }
+      
+      a:hover {
+      	text-decoration: none;
+      }
     </style>
 </head>
 <body>

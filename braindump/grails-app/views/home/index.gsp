@@ -10,6 +10,9 @@
 	</head>
 	<body>
 		<sec:ifLoggedIn>
+			<g:if test="${tag}">
+				<h1><g:message code="home.search.tag.title" args="[tag]"/></h1>
+			</g:if>
 	        <h3><g:message code="note.latest"/></h3>
 			<table class="condensed-table zebra-striped">
 			<g:each in="${recentNotes}" var="note">

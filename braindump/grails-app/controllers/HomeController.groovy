@@ -31,7 +31,8 @@ class HomeController {
 						recentNotes: Note.collection.find(["tags" : params.tag]).sort('dateCreated' : -1),
 						recentLinks: Link.collection.find(["tags" : params.tag]).sort('dateCreated' : -1),
 						recentBooks: Book.collection.find(["tags" : params.tag]).sort('dateCreated' : -1),
-						recentTodos: Todo.collection.find(["tags" : params.tag]).sort('dateCreated' : -1)
+						recentTodos: Todo.collection.find(["tags" : params.tag]).sort('dateCreated' : -1),
+						tag: params.tag
 					])
 		}
 		else {

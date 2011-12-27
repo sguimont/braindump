@@ -36,7 +36,7 @@
 		<g:each in="${recentBooks}" var="book">
 		<tr>
             <td class="flag"><app:isNew date="${book.lastUpdated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew></td>
-			<td><g:link url="${book.bookUrl}" target="_blank">${book.title}</g:link><g:if test="${book.tags}"><br/><g:each var="tag" in="${book.tags}"><span class="label">${tag}</span>&nbsp;</g:each></g:if></td>
+			<td><g:link url="${book.bookUrl}" target="_blank">${book.title}</g:link><g:if test="${book.tags}"><br/><g:each var="tag" in="${book.tags}"><a href="<g:createLink controller="home" action="search" params="[tag:tag]"/>"><span class="label">${tag}</span></a>&nbsp;</g:each></g:if></td>
             <td style="color: #AAA; text-align: right; white-space: nowrap;"><g:formatDate date="${book.lastUpdated}" format="yyyy-MM-dd HH:mm:ss" /><br/><prettytime:display date="${book.lastUpdated}" /></td>
 		</tr>
 		</g:each>

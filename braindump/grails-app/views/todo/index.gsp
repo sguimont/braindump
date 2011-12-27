@@ -45,7 +45,7 @@
 		<tr><!-- FIXME (SG) : Translate the toto representation  -->
             <td class="flag"><app:isNew date="${todo.lastUpdated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew></td>
             <td>${todo.todo}<g:if test="${todo.reminder}"> at <g:formatDate date="${todo.reminder}" format="yyyy-MM-dd HH:mm" /> in <prettytime:display date="${todo.reminder}" /></g:if>
-            	<g:if test="${todo.tags}"><br/><g:each var="tag" in="${todo.tags}"><span class="label">${tag}</span>&nbsp;</g:each></g:if></td>
+            	<g:if test="${todo.tags}"><br/><g:each var="tag" in="${todo.tags}"><a href="<g:createLink controller="home" action="search" params="[tag:tag]"/>"><span class="label">${tag}</span></a>&nbsp;</g:each></g:if></td>
             <td style="color: #AAA; text-align: right; white-space: nowrap;"><g:formatDate date="${todo.lastUpdated}" format="yyyy-MM-dd HH:mm:ss" /><br/><prettytime:display date="${todo.lastUpdated}" /></td>
 		</tr>
 		</g:each>
