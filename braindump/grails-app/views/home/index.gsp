@@ -6,6 +6,8 @@
 		<jq:jquery>
 			 $("#homeMenu").addClass("active")
 			 $("#pageHeader").html("<g:message code="home.quote" encodeAs="JavaScript"/>")
+			 
+			 $("#myCanvas").tagcanvas({},'tags') 
 		</jq:jquery>
 	</head>
 	<body>
@@ -50,6 +52,19 @@
 	        </tr>
 	        </g:each>
 	        </table>
-	    </sec:ifLoggedIn>
+	        <h3>Tags</h3>
+	        <div>
+			 <canvas width="300px" height="300px" id="myCanvas">
+			  <p>In Internet Explorer versions up to 8, things inside the canvas are inaccessible!</p>
+			 </canvas>
+			 <div id="tags">
+			  <ul>
+		        <g:each var="tag" in="${tags}">
+	        		<li><a href="#" data-weight="${tag.value.count}">${tag._id}</a></li>
+		        </g:each>
+			  </ul>
+			 </div>
+	        </div>
+ 	    </sec:ifLoggedIn>
 	</body>
 </html>

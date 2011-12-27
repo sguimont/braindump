@@ -4,9 +4,10 @@
   <head>
     <meta charset="utf-8">
 	<title><g:layoutTitle default="Brain Dump" /></title>
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <g:javascript src="excanvas.js" />
     <![endif]-->
 	<r:require modules="application, bootstrap, jquery, jquery-ui" />
 	<r:layoutResources />
