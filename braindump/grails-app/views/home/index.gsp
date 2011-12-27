@@ -6,8 +6,15 @@
 		<jq:jquery>
 			 $("#homeMenu").addClass("active")
 			 $("#pageHeader").html("<g:message code="home.quote" encodeAs="JavaScript"/>")
+
+			 var gradient = {
+				 0:    '#f00', // red
+				 0.33: '#ff0', // yellow
+				 0.66: '#0f0', // green
+				 1:    '#00f'  // blue
+				};
 			 
-			 $("#myCanvas").tagcanvas({},'tags') 
+			 $("#myCanvas").tagcanvas({weight: true, weightMode:'both', weightFrom: 'data-weight', weightSize: 15.0, weightGradient : gradient},'tags') 
 		</jq:jquery>
 	</head>
 	<body>
@@ -57,10 +64,11 @@
 			 <canvas width="300px" height="300px" id="myCanvas">
 			  <p>In Internet Explorer versions up to 8, things inside the canvas are inaccessible!</p>
 			 </canvas>
+			 
 			 <div id="tags">
 			  <ul>
 		        <g:each var="tag" in="${tags}">
-	        		<li><a href="#" data-weight="${tag.value.count}">${tag._id}</a></li>
+	        		<li><a href="#" style="font-size: <g:formatNumber number="${tag.value.count}" maxFractionDigits="0"/>ex" data-weight="<g:formatNumber number="${tag.value.count}" maxFractionDigits="0"/>">${tag._id}</a></li>
 		        </g:each>
 			  </ul>
 			 </div>
