@@ -6,6 +6,12 @@
 		<jq:jquery>
 			 $('#bookMenu').addClass("active")
 			 $("#pageHeader").html("<g:message code="book.quote" encodeAs="JavaScript"/>")
+			 
+			 $('#books tr').click(function() {
+			 	var bookId = $(this).attr('bookId')
+			 	window.location = '<g:createLink controller="book" action="edit" />/' + bookId 
+			 });
+			 
 		</jq:jquery>
 	</head>
 	<body>
@@ -36,9 +42,9 @@
                 <g:submitButton class="btn small primary" name="create" value="${message(code:'default.button.create.label')}" />
             </fieldset>
 		</g:form>
-		<table class="condensed-table zebra-striped recentList">
+		<table id="books" class="condensed-table zebra-striped recentList">
 		<g:each in="${recentBooks}" var="book">
-		<tr>
+		<tr bookId="${book._id}">
             <td class="flag"><app:isNew date="${book.lastUpdated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew></td>
 			<td><g:link url="${book.bookUrl}" target="_blank">${book.title}</g:link><g:if test="${book.tags}"><br/><g:each var="tag" in="${book.tags}"><a href="<g:createLink controller="home" action="search" params="[tag:tag]"/>"><span class="label">${tag}</span></a>&nbsp;</g:each></g:if></td>
             <td style="color: #AAA; text-align: right; white-space: nowrap;"><g:formatDate date="${book.lastUpdated}" format="yyyy-MM-dd HH:mm:ss" /><br/><prettytime:display date="${book.lastUpdated}" /></td>

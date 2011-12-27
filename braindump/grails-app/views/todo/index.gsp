@@ -10,6 +10,11 @@
  			 	timeFormat: 'h:m',
  			 	dateFormat: 'yy-mm-dd'
  			 });
+ 			 $('#todos tr').click(function() {
+			 	var todoId = $(this).attr('todoId')
+			 	window.location = '<g:createLink controller="todo" action="edit" />/' + todoId 
+			 });
+ 			 
 		</jq:jquery>
 	</head>
 	<body>
@@ -44,9 +49,9 @@
                 <g:submitButton class="btn small primary" name="create" value="${message(code:'default.button.create.label')}" />
             </fieldset>
 		</g:form>
-		<table class="condensed-table zebra-striped recentList">
+		<table id="todos" class="condensed-table zebra-striped recentList">
 		<g:each in="${recentTodos}" var="todo">
-		<tr><!-- FIXME (SG) : Translate the toto representation  -->
+		<tr todoId="${todo._id}"><!-- FIXME (SG) : Translate the toto representation  -->
             <td class="flag"><app:isNew date="${todo.lastUpdated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew></td>
             <td>${todo.todo}<g:if test="${todo.reminder}"> at <g:formatDate date="${todo.reminder}" format="yyyy-MM-dd HH:mm" /> in <prettytime:display date="${todo.reminder}" /></g:if>
             	<g:if test="${todo.tags}"><br/><g:each var="tag" in="${todo.tags}"><a href="<g:createLink controller="home" action="search" params="[tag:tag]"/>"><span class="label">${tag}</span></a>&nbsp;</g:each></g:if></td>
