@@ -1,6 +1,6 @@
 <head>
 <meta name='layout' content='main' />
-<title><g:message code="springSecurity.denied.title" /></title>
+<title><g:message code="application.title"/> - <g:message code="springSecurity.denied.title" /></title>
 </head>
 
 <body>

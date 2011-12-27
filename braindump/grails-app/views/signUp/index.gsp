@@ -1,7 +1,7 @@
 <html>
 <head>
 	<meta name='layout' content='main'/>
-	<title><g:message code="signup.title"/></title>
+	<title><g:message code="application.title"/> - <g:message code="signup.title"/></title>
 </head>
 
 <body>

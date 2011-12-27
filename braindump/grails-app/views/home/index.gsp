@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-		<title>Welcome to Brain Dump</title>
+		<title><g:message code="application.title"/></title>
 		<jq:jquery>
 			 $("#homeMenu").addClass("active")
 			 $("#pageHeader").html("<g:message code="home.quote" encodeAs="JavaScript"/>")

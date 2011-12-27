@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-		<title><g:message code="default.notes.label"/></title>
+		<title><g:message code="application.title"/> - <g:message code="default.notes.label"/></title>
 		<jq:jquery>
 			 $('#noteMenu').addClass("active")
 			 $("#pageHeader").html("<g:message code="note.quote" encodeAs="JavaScript"/>")
