@@ -31,12 +31,31 @@ class ContactController {
 		}
 	}
 	
+	def delete() {
+		Contact contact = Contact.get(params.id)
+		if(contact) {
+			contact.delete()
+
+			flash.info = "Succesfull deleted the artefact"
+			redirect(action:"index")
+		}
+		else {
+			flash.error = "Cannot delete artefact : "  + params.id
+			redirect(action:"index")
+		}
+	}
+
 	def edit() {
 		render(view:"edit", model: [contact: Contact.get(params.id)])
 	}
 
 	def save() {
 		Contact contact = Contact.get(params.id)
+		if(!contact) {
+			flash.error = "Cannot update artefact : "  + params.id
+			redirect(action:"index")
+		}
+
 		contact.properties = params
 
 		contact.tags.clear()

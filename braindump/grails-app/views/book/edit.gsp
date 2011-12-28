@@ -4,8 +4,8 @@
 		<meta name="layout" content="main"/>
 		<title><g:message code="application.title"/> - <g:message code="default.books.label"/></title>
 		<jq:jquery>
-			 $('#bookMenu').addClass("active")
-			 $("#pageHeader").html("<g:message code="book.quote" encodeAs="JavaScript"/>")
+			$('#bookMenu').addClass("active")
+			$("#pageHeader").html("<g:message code="book.quote" encodeAs="JavaScript"/>")
 		</jq:jquery>
 	</head>
 	<body>
@@ -36,9 +36,25 @@
 	                    <g:textField name="tag" class="small" />
 	                </div>
                 </div>
-                <g:submitButton class="btn small primary" name="save" value="${message(code:'default.button.update.label')}" />
-                <g:link class="btn small" name="cancel" controller="book"><g:message code="default.button.cancel.label"/></g:link>
+                <div class="well" style="margin-right: 20px;">
+	                <g:submitButton class="btn primary" name="save" value="${message(code:'default.button.update.label')}" />
+	                <g:link elementId="cancelButton" class="btn" name="cancel" controller="book"><g:message code="default.button.cancel.label"/></g:link>
+	                <a id="deleteButton"  style="float: right;" class="btn danger" data-controls-modal="delete-confirm-modal" data-backdrop="true" data-keyboard="true"><g:message code="default.button.delete.label"/></a> 
+                </div>
             </fieldset>
 		</g:form>
+ 		<div id="delete-confirm-modal" class="modal hide fade">
+            <div class="modal-header">
+              <a href="#" class="close">&times;</a>
+              <h3><g:message code="modal.delete.confirmation.title"/></h3>
+            </div>
+            <div class="modal-body">
+              <p><g:message code="modal.delete.confirmation.text"/></p>
+            </div>
+            <div class="modal-footer">
+				<g:link class="btn primary" name="delete" controller="book" action="delete" id="${book.id}"><g:message code="default.button.delete.label"/></g:link>
+				<button class="btn secondary" onclick="$('#delete-confirm-modal').modal('hide');"><g:message code="default.button.cancel.label"/></button>
+            </div>
+        </div>
 	</body>
 </html>

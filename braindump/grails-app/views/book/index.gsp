@@ -39,7 +39,7 @@
 	                    <g:textField name="tag" class="small" />
                    </div>
                 </div>
-                <g:submitButton class="btn small primary" name="create" value="${message(code:'default.button.create.label')}" />
+                <g:submitButton class="btn primary" name="create" value="${message(code:'default.button.create.label')}" />
             </fieldset>
 		</g:form>
 		<table id="books" class="condensed-table zebra-striped recentList">

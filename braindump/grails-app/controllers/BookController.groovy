@@ -6,57 +6,66 @@ import com.mushcorp.lt.artefact.Book
 class BookController {
 
 	def index() {
-		render(view: "index", model: [recentBooks: Book.collection.find().sort('dateCreated': -1).limit(10)])
+		render(view:"index", model:[recentBooks: Book.collection.find().sort('dateCreated': -1)])
 	}
 
 	def create() {
 		Book book = new Book()
 		book.properties = params
-
-		for (tag in params.list('tag')) {
-			if(tag.trim()) {
-				if(!book.tags.contains(tag.trim())) {
-					book.tags.add(tag.trim())
-				}
-			}
-		}
+		book.updateTags(params.list('tag'))
 
 		if (book.save()) {
-			flash.info = "Succesfull created the artefact"
+			flash.info = "Succesfully created the artefact"
 			return redirect(action: "index")
 		}
 		else {
-			flash.error = "Cannot create artefact : "  + book.errors
-			println book.errors
-			render(view: "index", model: [recentBooks: Book.collection.find().sort('dateCreated': -1).limit(10)])
+			flash.error = "Cannot create artefact : ${book.errors}"
+			render(action:"index", model:[recentBooks: Book.collection.find().sort('dateCreated': -1)])
 		}
 	}
-	
+
+	def delete() {
+		Book book = Book.get(params.id)
+		if(book) {
+			book.delete()
+
+			flash.info = "Succesfully deleted the artefact"
+			redirect(action:"index")
+		}
+		else {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
+	}
+
 	def edit() {
-		render(view:"edit", model: [book: Book.get(params.id)])
+		Book book = Book.get(params.id)
+		if(book) {
+			render(view:"edit", model: [book: Book.get(params.id)])
+		}
+		else {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
 	}
 
 	def save() {
 		Book book = Book.get(params.id)
-		book.properties = params
-
-		book.tags.clear()
-		for (tag in params.list('tag')) {
-			if(tag.trim()) {
-				if(!book.tags.contains(tag.trim())) {
-					book.tags.add(tag.trim())
-				}
-			}
+		if(!book) {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
 		}
 
+		book.properties = params
+		book.updateTags(params.list('tag'))
+
 		if(book.save()) {
-			flash.info = "Succesfull updated the artefact"
+			flash.info = "Succesfully updated the artefact"
 			return redirect(action:"index")
 		}
 		else {
-			flash.error = "Cannot update artefact : " + book.errors
-			println book.errors
-			render(view:"edit", model: [book: book])
+			flash.error = "Cannot update artefact : ${book.errors}"
+			render(view:"edit", model:[book: book])
 		}
 	}
 }

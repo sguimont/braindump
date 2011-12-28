@@ -12,6 +12,23 @@ abstract class Artefact {
 	Date dateCreated
 	Date lastUpdated
 
+	void updateTags(List<String> newTags) {
+		if(tags) {
+			tags.clear()
+		}
+		else {
+			tags = new ArrayList<String>()
+		}
+
+		for (tag in newTags) {
+			if(tag.trim()) {
+				if(!tags.contains(tag.trim())) {
+					tags.add(tag.trim())
+				}
+			}
+		}
+	}
+
 	static constraints = {
 		notes(nullable: true, blank:true, size:0..50000)
 	}
