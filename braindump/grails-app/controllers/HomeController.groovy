@@ -50,14 +50,35 @@ class HomeController {
 
 	def search() {
 		if(springSecurityService.isLoggedIn()) {
+			def tagNotes = Note.withCriteria {
+				eq("tags", params.tag)
+				order("dateCreated", "desc")
+			}
+			def tagLinks = Link.withCriteria {
+				eq("tags", params.tag)
+				order("dateCreated", "desc")
+			}
+			def tagBooks = Book.withCriteria {
+				eq("tags", params.tag)
+				order("dateCreated", "desc")
+			}
+			def tagTodos = Todo.withCriteria {
+				eq("tags", params.tag)
+				order("dateCreated", "desc")
+			}
+			def tagContacts = Contact.withCriteria {
+				eq("tags", params.tag)
+				order("dateCreated", "desc")
+			}
+
 			render(view:"index", model: [
-						recentNotes: Note.collection.find(["tags" : params.tag]).sort('dateCreated' : -1),
-						recentLinks: Link.collection.find(["tags" : params.tag]).sort('dateCreated' : -1),
-						recentBooks: Book.collection.find(["tags" : params.tag]).sort('dateCreated' : -1),
-						recentTodos: Todo.collection.find(["tags" : params.tag]).sort('dateCreated' : -1),
-						recentContacts: Contact.collection.find(["tags" : params.tag]).sort('dateCreated' : -1),
-						tag: params.tag
-					])
+				recentNotes: tagNotes,
+				recentLinks: tagLinks,
+				recentBooks: tagBooks,
+				recentTodos: tagTodos,
+				recentContacts: tagContacts,
+				tag: params.tag
+			])
 		}
 		else {
 			render(view:"index", model: [])
