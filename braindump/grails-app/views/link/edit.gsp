@@ -28,17 +28,16 @@
                 <div class="clearfix">
                     <label for='tag'><g:message code="link.tags.label"/></label>
                     <div class="input">
-                    	<g:each var="tag" in="${link.tags}">
-		                    <g:textField name="tag" class="small" value="${tag}" />
-                    	</g:each>
-	                    <g:textField name="tag" class="small" />
-	                    <g:textField name="tag" class="small" />
-	                    <g:textField name="tag" class="small" />
+						<g:render template="/templates/editTags" model="[tags:link.tags]" />
 	                </div>
                 </div>
-                <g:submitButton class="btn small primary" name="save" value="${message(code:'default.button.update.label')}" />
-                <g:link class="btn small" name="cancel" controller="link"><g:message code="default.button.cancel.label"/></g:link>
+                <div class="well" style="margin-right: 20px;">
+	                <g:submitButton class="btn primary" name="save" value="${message(code:'default.button.update.label')}" />
+	                <g:link class="btn" name="cancel" controller="link"><g:message code="default.button.cancel.label"/></g:link>
+	                <a id="deleteButton" style="float: right;" class="btn danger" data-controls-modal="delete-confirm-modal" data-backdrop="true" data-keyboard="true"><g:message code="default.button.delete.label"/></a>
+	            </div> 
             </fieldset>
 		</g:form>
+		<g:render template="/templates/confirmationDeleteDialog" model="[controller:'link', action:'delete', id:link.id]" />
 	</body>
 </html>

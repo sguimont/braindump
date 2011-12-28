@@ -11,6 +11,14 @@
 			 	window.location = '<g:createLink controller="contact" action="edit" />/' + contactId 
 			 });
 			 
+			  $("tr[rel=popover]").popover({
+				offset: 10,
+				html: true,
+				delayIn: 500,
+				placement: "below",
+				title: function() { return "<g:message code="contact.notes.label"/>" },
+                live: true
+              })
 		</jq:jquery>
 	</head>
 	<body>
@@ -46,15 +54,23 @@
 	                    <g:textField name="tag" class="small" />
                    </div>
                 </div>
-                <g:submitButton class="btn small primary" name="create" value="${message(code:'default.button.create.label')}" />
+                <g:submitButton class="btn primary" name="create" value="${message(code:'default.button.create.label')}" />
             </fieldset>
 		</g:form>
 		<table id="contacts" class="condensed-table zebra-striped recentList">
 		<g:each in="${recentContacts}" var="contact">
-		<tr contactId="${contact._id}">
-            <td class="flag"><app:isNew date="${contact.lastUpdated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew></td>
-			<td>${contact.name}<g:if test="${contact.tags}"><br/><g:each var="tag" in="${contact.tags}"><a href="<g:createLink controller="home" action="search" params="[tag:tag]"/>"><span class="label">${tag}</span></a>&nbsp;</g:each></g:if></td>
-            <td style="color: #AAA; text-align: right; white-space: nowrap;"><g:formatDate date="${contact.lastUpdated}" format="yyyy-MM-dd HH:mm:ss" /><br/><prettytime:display date="${contact.lastUpdated}" /></td>
+		<tr contactId="${contact._id}" rel="popover" data-content="${contact.notes}<br/><br/><b><g:message code="contact.mobilePhone.label"/>: </b>${contact.mobilePhone}<br/><b><g:message code="contact.homePhone.label"/>: </b>${contact.homePhone}<br/><b><g:message code="contact.workPhone.label"/>: </b>${contact.workPhone}">
+            <td class="flag">
+            	<app:isNew date="${contact.lastUpdated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew>
+            </td>
+			<td>
+				${contact.name}<g:if test="${contact.tags}"><br/>
+				<g:each var="tag" in="${contact.tags}"><a href="<g:createLink controller="home" action="search" params="[tag:tag]"/>"><span class="label">${tag}</span></a>&nbsp;</g:each></g:if>
+			</td>
+            <td style="color: #AAA; text-align: right; white-space: nowrap;">
+            	<g:formatDate date="${contact.lastUpdated}" format="yyyy-MM-dd HH:mm:ss" /><br/>
+            	<prettytime:display date="${contact.lastUpdated}" />
+			</td>
 		</tr>
 		</g:each>
 		</table>

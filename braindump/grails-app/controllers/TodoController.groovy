@@ -7,63 +7,69 @@ import com.mushcorp.lt.artefact.Todo
 
 @Secured(["hasRole('ROLE_USER')"])
 class TodoController {
-
 	def index() {
-		render(view: "index", model: [recentTodos: Todo.collection.find().sort('dateCreated': -1).limit(10)])
+		render(view:"index", model:[recentTodos: Todo.collection.find().sort('dateCreated': -1)])
 	}
 
 	def create() {
 		Todo todo = new Todo()
 		todo.properties = params
+		todo.updateTags(params.list('tag'))
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm")
 		todo.reminder = dateFormat.parse(params.reminderDateTime)
 
-		for (tag in params.list('tag')) {
-			if(tag.trim()) {
-				if(!todo.tags.contains(tag.trim())) {
-					todo.tags.add(tag.trim())
-				}
-			}
-		}
-
 		if (todo.save()) {
-			flash.info = "Succesfull created the artefact"
+			flash.info = "Succesfully created the artefact"
 			return redirect(action: "index")
 		}
 		else {
-			flash.error = "Cannot create artefact : " + todo.errors
-			println todo.errors
-			render(view: "index", model: [recentTodos: Todo.collection.find().sort('dateCreated': -1).limit(10)])
+			flash.error = "Cannot create artefact : ${todo.errors}"
+			return redirect(action: "index")
 		}
 	}
-	
+
+	def delete() {
+		Todo todo = Todo.get(params.id)
+		if(todo) {
+			todo.delete()
+
+			flash.info = "Succesfully deleted the artefact"
+			redirect(action:"index")
+		}
+		else {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
+	}
+
 	def edit() {
 		Todo todo = Todo.get(params.id)
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm")
-		render(view:"edit", model: [todo: todo, reminderDateTime: dateFormat.format(todo.reminder)])
+		if(todo) {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm")
+			render(view:"edit", model: [todo: todo, reminderDateTime: dateFormat.format(todo.reminder)])
+		}
+		else {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
 	}
 
 	def save() {
 		Todo todo = Todo.get(params.id)
-		todo.properties = params
-
-		todo.tags.clear()
-		for (tag in params.list('tag')) {
-			if(tag.trim()) {
-				if(!todo.tags.contains(tag.trim())) {
-					todo.tags.add(tag.trim())
-				}
-			}
+		if(!todo) {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
 		}
 
+		todo.properties = params
+		todo.updateTags(params.list('tag'))
+
 		if(todo.save()) {
-			flash.info = "Succesfull updated the artefact"
+			flash.info = "Succesfully updated the artefact"
 			return redirect(action:"index")
 		}
 		else {
-			flash.error = "Cannot update artefact : " + todo.errors
-			println todo.errors
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm")
 			render(view:"edit", model: [todo: todo, reminderDateTime: dateFormat.format(todo.reminder)])
 		}

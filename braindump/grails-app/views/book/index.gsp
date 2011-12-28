@@ -15,7 +15,7 @@
 			  $("tr[rel=popover]").popover({
 				offset: 10,
 				html: true,
-				delayIn: 1000,
+				delayIn: 500,
 				placement: "below",
 				title: function() { return "<g:message code="book.notes.label"/>" },
                 live: true

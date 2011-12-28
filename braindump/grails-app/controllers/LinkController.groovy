@@ -5,57 +5,66 @@ import com.mushcorp.lt.artefact.Link
 @Secured(["hasRole('ROLE_USER')"])
 class LinkController {
 	def index() {
-		render(view:"index", model: [recentLinks: Link.collection.find().sort('dateCreated' : -1).limit(10)])
+		render(view:"index", model:[recentLinks: Link.collection.find().sort('dateCreated': -1)])
 	}
 
 	def create() {
 		Link link = new Link()
 		link.properties = params
+		link.updateTags(params.list('tag'))
 
-		for (tag in params.list('tag')) {
-			if(tag.trim()) {
-				if(!link.tags.contains(tag.trim())) {
-					link.tags.add(tag.trim())
-				}
-			}
-		}
-
-		if(link.save()) {
-			flash.info = "Succesfull created the artefact"
-			return redirect(action:"index")
+		if (link.save()) {
+			flash.info = "Succesfully created the artefact"
+			return redirect(action: "index")
 		}
 		else {
-			flash.error = "Cannot create artefact : " + link.errors
-			println link.errors
-			render(view:"index", model: [recentLinks: Link.collection.find().sort('dateCreated' : -1).limit(10)])
+			flash.error = "Cannot create artefact : ${link.errors}"
+			return redirect(action: "index")
 		}
 	}
-	
+
+	def delete() {
+		Link link = Link.get(params.id)
+		if(link) {
+			link.delete()
+
+			flash.info = "Succesfully deleted the artefact"
+			redirect(action:"index")
+		}
+		else {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
+	}
+
 	def edit() {
-		render(view:"edit", model: [link: Link.get(params.id)])
+		Link link = Link.get(params.id)
+		if(link) {
+			render(view:"edit", model: [link: link])
+		}
+		else {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
 	}
 
 	def save() {
 		Link link = Link.get(params.id)
-		link.properties = params
-
-		link.tags.clear()
-		for (tag in params.list('tag')) {
-			if(tag.trim()) {
-				if(!link.tags.contains(tag.trim())) {
-					link.tags.add(tag.trim())
-				}
-			}
+		if(!link) {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
 		}
 
+		link.properties = params
+		link.updateTags(params.list('tag'))
+
 		if(link.save()) {
-			flash.info = "Succesfull updated the artefact"
+			flash.info = "Succesfully updated the artefact"
 			return redirect(action:"index")
 		}
 		else {
-			flash.error = "Cannot update artefact : " + link.errors
-			println link.errors
-			render(view:"edit", model: [link: link])
+			flash.error = "Cannot update artefact : ${link.errors}"
+			render(view:"edit", model:[link: link])
 		}
 	}
 }

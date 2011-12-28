@@ -4,77 +4,68 @@ import com.mushcorp.lt.artefact.Contact
 
 @Secured(["hasRole('ROLE_USER')"])
 class ContactController {
+
 	def index() {
-		render(view:"index", model: [recentContacts: Contact.collection.find().sort('dateCreated' : -1).limit(10)])
+		render(view:"index", model:[recentContacts: Contact.collection.find().sort('dateCreated': -1)])
 	}
 
 	def create() {
 		Contact contact = new Contact()
 		contact.properties = params
+		contact.updateTags(params.list('tag'))
 
-		for (tag in params.list('tag')) {
-			if(tag.trim()) {
-				if(!contact.tags.contains(tag.trim())) {
-					contact.tags.add(tag.trim())
-				}
-			}
-		}
-
-		if(contact.save()) {
-			flash.info = "Succesfull created the artefact"
-			return redirect(action:"index")
+		if (contact.save()) {
+			flash.info = "Succesfully created the artefact"
+			return redirect(action: "index")
 		}
 		else {
-			flash.error = "Cannot create artefact : " + contact.errors
-			println contact.errors
-			render(view:"index", model: [recentContacts: Contact.collection.find().sort('dateCreated' : -1).limit(10)])
+			flash.error = "Cannot create artefact : ${contact.errors}"
+			return redirect(action: "index")
 		}
 	}
-	
+
 	def delete() {
 		Contact contact = Contact.get(params.id)
 		if(contact) {
 			contact.delete()
 
-			flash.info = "Succesfull deleted the artefact"
+			flash.info = "Succesfully deleted the artefact"
 			redirect(action:"index")
 		}
 		else {
-			flash.error = "Cannot delete artefact : "  + params.id
+			flash.error = "Artefact '${params.id}' not found"
 			redirect(action:"index")
 		}
 	}
 
 	def edit() {
-		render(view:"edit", model: [contact: Contact.get(params.id)])
+		Contact contact = Contact.get(params.id)
+		if(contact) {
+			render(view:"edit", model: [contact: contact])
+		}
+		else {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
 	}
 
 	def save() {
 		Contact contact = Contact.get(params.id)
 		if(!contact) {
-			flash.error = "Cannot update artefact : "  + params.id
+			flash.error = "Artefact '${params.id}' not found"
 			redirect(action:"index")
 		}
 
 		contact.properties = params
-
-		contact.tags.clear()
-		for (tag in params.list('tag')) {
-			if(tag.trim()) {
-				if(!contact.tags.contains(tag.trim())) {
-					contact.tags.add(tag.trim())
-				}
-			}
-		}
+		contact.updateTags(params.list('tag'))
 
 		if(contact.save()) {
-			flash.info = "Succesfull updated the artefact"
+			flash.info = "Succesfully updated the artefact"
 			return redirect(action:"index")
 		}
 		else {
-			flash.error = "Cannot update artefact : " + contact.errors
-			println contact.errors
-			render(view:"edit", model: [contact: contact])
+			flash.error = "Cannot update artefact : ${contact.errors}"
+			render(view:"edit", model:[contact: contact])
 		}
 	}
 }

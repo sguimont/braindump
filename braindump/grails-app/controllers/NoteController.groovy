@@ -5,57 +5,66 @@ import com.mushcorp.lt.artefact.Note
 @Secured(["hasRole('ROLE_USER')"])
 class NoteController {
 	def index() {
-		render(view:"index", model: [recentNotes: Note.collection.find().sort('dateCreated' : -1).limit(10)])
+		render(view:"index", model:[recentNotes: Note.collection.find().sort('dateCreated': -1)])
 	}
 
 	def create() {
 		Note note = new Note()
 		note.properties = params
+		note.updateTags(params.list('tag'))
 
-		for (tag in params.list('tag')) {
-			if(tag.trim()) {
-				if(!note.tags.contains(tag.trim())) {
-					note.tags.add(tag.trim())
-				}
-			}
-		}
-
-		if(note.save()) {
-			flash.info = "Succesfull created the artefact"
-			return redirect(action:"index")
+		if (note.save()) {
+			flash.info = "Succesfully created the artefact"
+			return redirect(action: "index")
 		}
 		else {
-			flash.error = "Cannot create artefact : " + note.errors
-			println note.errors
-			render(view:"index", model: [recentNotes: Note.collection.find().sort('dateCreated' : -1).limit(10)])
+			flash.error = "Cannot create artefact : ${note.errors}"
+			return redirect(action: "index")
+		}
+	}
+
+	def delete() {
+		Note note = Note.get(params.id)
+		if(note) {
+			note.delete()
+
+			flash.info = "Succesfully deleted the artefact"
+			redirect(action:"index")
+		}
+		else {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
 		}
 	}
 
 	def edit() {
-		render(view:"edit", model: [note: Note.get(params.id)])
+		Note note = Note.get(params.id)
+		if(note) {
+			render(view:"edit", model: [note: note])
+		}
+		else {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
 	}
 
 	def save() {
 		Note note = Note.get(params.id)
-		note.properties = params
-
-		note.tags.clear()
-		for (tag in params.list('tag')) {
-			if(tag.trim()) {
-				if(!note.tags.contains(tag.trim())) {
-					note.tags.add(tag.trim())
-				}
-			}
+		if(!note) {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
 		}
 
+		note.properties = params
+		note.updateTags(params.list('tag'))
+
 		if(note.save()) {
-			flash.info = "Succesfull updated the artefact"
+			flash.info = "Succesfully updated the artefact"
 			return redirect(action:"index")
 		}
 		else {
-			flash.error = "Cannot update artefact : " + note.errors
-			println note.errors
-			render(view:"edit", model: [note: note])
+			flash.error = "Cannot update artefact : ${note.errors}"
+			render(view:"edit", model:[note: note])
 		}
 	}
 }

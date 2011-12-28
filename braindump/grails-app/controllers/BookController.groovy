@@ -20,7 +20,7 @@ class BookController {
 		}
 		else {
 			flash.error = "Cannot create artefact : ${book.errors}"
-			render(action:"index", model:[recentBooks: Book.collection.find().sort('dateCreated': -1)])
+			return redirect(action: "index")
 		}
 	}
 
@@ -41,7 +41,7 @@ class BookController {
 	def edit() {
 		Book book = Book.get(params.id)
 		if(book) {
-			render(view:"edit", model: [book: Book.get(params.id)])
+			render(view:"edit", model: [book: book])
 		}
 		else {
 			flash.error = "Artefact '${params.id}' not found"

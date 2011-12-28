@@ -28,36 +28,16 @@
                 <div class="clearfix">
                     <label for='tag'><g:message code="book.tags.label"/></label>
                     <div class="input">
-                    	<g:set var="count" value="${0}" />
-                    	<g:each var="tag" in="${book.tags}">
-		                    <g:textField name="tag" class="small" value="${tag}" />
-	                    	<g:set var="count" value="${count + 1}" />
-                    	</g:each>
-                    	<g:while test="${count < 8}">
-		                    <g:textField name="tag" class="small" />
-	                    	<g:set var="count" value="${count + 1}" />
-                    	</g:while>
-	                </div>
+						<g:render template="/templates/editTags" model="[tags:book.tags]" />
+					</div>
                 </div>
                 <div class="well" style="margin-right: 20px;">
 	                <g:submitButton class="btn primary" name="save" value="${message(code:'default.button.update.label')}" />
-	                <g:link elementId="cancelButton" class="btn" name="cancel" controller="book"><g:message code="default.button.cancel.label"/></g:link>
-	                <a id="deleteButton"  style="float: right;" class="btn danger" data-controls-modal="delete-confirm-modal" data-backdrop="true" data-keyboard="true"><g:message code="default.button.delete.label"/></a> 
+	                <g:link class="btn" name="cancel" controller="book"><g:message code="default.button.cancel.label"/></g:link>
+	                <a id="deleteButton" style="float: right;" class="btn danger" data-controls-modal="delete-confirm-modal" data-backdrop="true" data-keyboard="true"><g:message code="default.button.delete.label"/></a> 
                 </div>
             </fieldset>
 		</g:form>
- 		<div id="delete-confirm-modal" class="modal hide fade">
-            <div class="modal-header">
-              <a href="#" class="close">&times;</a>
-              <h3><g:message code="modal.delete.confirmation.title"/></h3>
-            </div>
-            <div class="modal-body">
-              <p><g:message code="modal.delete.confirmation.text"/></p>
-            </div>
-            <div class="modal-footer">
-				<g:link class="btn primary" name="delete" controller="book" action="delete" id="${book.id}"><g:message code="default.button.delete.label"/></g:link>
-				<button class="btn secondary" onclick="$('#delete-confirm-modal').modal('hide');"><g:message code="default.button.cancel.label"/></button>
-            </div>
-        </div>
+		<g:render template="/templates/confirmationDeleteDialog" model="[controller:'book', action:'delete', id:book.id]" />
 	</body>
 </html>

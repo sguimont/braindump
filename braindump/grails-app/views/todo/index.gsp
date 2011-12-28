@@ -16,6 +16,15 @@
 			 	var todoId = $(this).attr('todoId')
 			 	window.location = '<g:createLink controller="todo" action="edit" />/' + todoId 
 			 });
+
+			 $("tr[rel=popover]").popover({
+				offset: 10,
+				html: true,
+				delayIn: 500,
+				placement: "below",
+				title: function() { return "<g:message code="todo.notes.label"/>" },
+                live: true
+              })
 		</jq:jquery>
 	</head>
 	<body>
@@ -47,17 +56,24 @@
 	                    <g:textField name="tag" class="small" />
                    </div>
                 </div>
-                <g:submitButton class="btn small primary" name="create" value="${message(code:'default.button.create.label')}" />
+                <g:submitButton class="btn primary" name="create" value="${message(code:'default.button.create.label')}" />
             </fieldset>
 		</g:form>
 		
 		<table id="todos" class="condensed-table zebra-striped recentList">
 		<g:each in="${recentTodos}" var="todo">
-		<tr todoId="${todo._id}"><!-- FIXME (SG) : Translate the toto representation  -->
-            <td class="flag"><app:isNew date="${todo.lastUpdated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew></td>
-            <td>${todo.todo}<g:if test="${todo.reminder}"> at <g:formatDate date="${todo.reminder}" format="yyyy-MM-dd HH:mm" /> in <prettytime:display date="${todo.reminder}" /></g:if>
-            	<g:if test="${todo.tags}"><br/><g:each var="tag" in="${todo.tags}"><a href="<g:createLink controller="home" action="search" params="[tag:tag]"/>"><span class="label">${tag}</span></a>&nbsp;</g:each></g:if></td>
-            <td style="color: #AAA; text-align: right; white-space: nowrap;"><g:formatDate date="${todo.lastUpdated}" format="yyyy-MM-dd HH:mm:ss" /><br/><prettytime:display date="${todo.lastUpdated}" /></td>
+		<tr todoId="${todo._id}" rel="popover" data-content="${todo.notes}">
+            <td class="flag">
+            	<app:isNew date="${todo.lastUpdated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew>
+            </td>
+            <td>
+            	<!-- FIXME (SG) : Translate the toto representation  -->
+            	${todo.todo}<g:if test="${todo.reminder}"> at <g:formatDate date="${todo.reminder}" format="yyyy-MM-dd HH:mm" /> in <prettytime:display date="${todo.reminder}" /></g:if>
+            	<g:if test="${todo.tags}"><br/><g:each var="tag" in="${todo.tags}"><a href="<g:createLink controller="home" action="search" params="[tag:tag]"/>"><span class="label">${tag}</span></a>&nbsp;</g:each></g:if>
+			</td>
+            <td style="color: #AAA; text-align: right; white-space: nowrap;">
+            	<g:formatDate date="${todo.lastUpdated}" format="yyyy-MM-dd HH:mm:ss" /><br/><prettytime:display date="${todo.lastUpdated}" />
+            </td>
 		</tr>
 		</g:each>
 		</table>
