@@ -31,6 +31,15 @@ recentContacts<!doctype html>
 			 	var contactId = $(this).attr('contactId')
 			 	window.location = '<g:createLink controller="contact" action="edit" />/' + contactId 
 			 });
+			 
+			 $("tr[rel=popover]").popover({
+				offset: 10,
+				html: true,
+				delayIn: 500,
+				placement: "below",
+				title: function() { return "<g:message code="home.notes.label"/>" },
+                live: true
+              })			 
 		</jq:jquery>
 	</head>
 	<body>
@@ -40,82 +49,19 @@ recentContacts<!doctype html>
 			</g:if>
 			
 	        <h3><g:message code="note.latest"/></h3>
-			<table id="notes" class="condensed-table zebra-striped">
-			<g:each in="${recentNotes}" var="note">
-			<tr noteId="${note.id}">
-	            <td class="flag">
-	            	<app:isNew date="${note.dateCreated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew>
-	            	<app:isUpdatedRecently dateCreated="${note.dateCreated}" lastUpdated="${note.lastUpdated}"><span class="label warning"><g:message code="flag.updated"/></span></app:isUpdatedRecently>
-	            </td>
-				<td>${note.notes.intro(60)}</td>
-	            <td style="color: #AAA; text-align: right; white-space: nowrap;"><prettytime:display date="${note.lastUpdated}" /></td>
-			</tr>
-			</g:each>
-			</table>
+			<g:render template="/note/list" model="[notes:recentNotes]" />
 			
 	        <h3><g:message code="link.latest"/></h3>
-	        <table id="links" class="condensed-table zebra-striped recentList">
-	        <g:each in="${recentLinks}" var="link">
-	        <tr linkId="${link.id}">
-	            <td class="flag">
-	            	<app:isNew date="${link.dateCreated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew>
-	            	<app:isUpdatedRecently dateCreated="${link.dateCreated}" lastUpdated="${link.lastUpdated}"><span class="label warning"><g:message code="flag.updated"/></span></app:isUpdatedRecently>
-	           	</td>
-	            <td><g:link url="${link.url}" target="_blank">${link.title}</g:link></td>
-	            <td style="color: #AAA; text-align: right; white-space: nowrap;"><prettytime:display date="${link.lastUpdated}" /></td>
-	        </tr>
-	        </g:each>
-	        </table>
+			<g:render template="/link/list" model="[links:recentLinks]" />
 	        
 	        <h3><g:message code="book.latest"/></h3>
-	        <table id="books" class="condensed-table zebra-striped recentList">
-	        <g:each in="${recentBooks}" var="book">
-	        <tr bookId="${book.id}">
-	            <td class="flag">
-	            	<app:isNew date="${book.dateCreated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew>
-	            	<app:isUpdatedRecently dateCreated="${book.dateCreated}" lastUpdated="${book.lastUpdated}"><span class="label warning"><g:message code="flag.updated"/></span></app:isUpdatedRecently>
-	            </td>
-				<td><g:link url="${book.bookUrl}" target="_blank">${book.title}</g:link></td>
-	            <td style="color: #AAA; text-align: right; white-space: nowrap;"><prettytime:display date="${book.lastUpdated}" /></td>
-	        </tr>
-	        </g:each>
-	        </table>
+       		<g:render template="/book/list" model="[books:recentBooks]" />
 	        
 	        <h3><g:message code="todo.latest"/></h3>
-	        <table id="todos" class="condensed-table zebra-striped recentList">
-	        <g:each in="${recentTodos}" var="todo">
-	        <tr todoId="${todo.id}">
-	            <td class="flag">
-	            	<app:isNew date="${todo.dateCreated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew>
-	            	<app:isUpdatedRecently dateCreated="${todo.dateCreated}" lastUpdated="${todo.lastUpdated}"><span class="label warning"><g:message code="flag.updated"/></span></app:isUpdatedRecently>
-	            	<g:if test="${todo.isLate()}"><span class="label important"><g:message code="flag.late"/></span></g:if>
-	            	<g:if test="${todo.done}"><span class="label notice"><g:message code="flag.done"/></span></g:if>
-	            </td>
-	            <td>
-	            	<!-- FIXME (SG) : Translate the toto representation  -->
-	            	${todo.todo}<g:if test="${todo.completeFor}"> for <g:formatDate date="${todo.completeFor}" format="yyyy-MM-dd HH:mm" /> in <prettytime:display date="${todo.completeFor}" /></g:if>
-	            	<g:if test="${todo.tags}"><br/><g:each var="tag" in="${todo.tags}"><a href="<g:createLink controller="home" action="search" params="[tag:tag]"/>"><span class="label">${tag}</span></a>&nbsp;</g:each></g:if>
-				</td>
-	            <td style="color: #AAA; text-align: right; white-space: nowrap;">
-	            	<g:formatDate date="${todo.lastUpdated}" format="yyyy-MM-dd HH:mm:ss" /><br/><prettytime:display date="${todo.lastUpdated}" />
-            </td>
-	        </tr>
-	        </g:each>
-	        </table>
+			<g:render template="/todo/list" model="[todos:recentTodos]" />		
 	        
 	        <h3><g:message code="contact.latest"/></h3>
-	        <table id="contacts" class="condensed-table zebra-striped recentList">
-	        <g:each in="${recentContacts}" var="contact">
-	        <tr contactId="${contact.id}">
-	            <td class="flag">
-	            	<app:isNew date="${contact.dateCreated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew>
-	            	<app:isUpdatedRecently dateCreated="${contact.dateCreated}" lastUpdated="${contact.lastUpdated}"><span class="label success"><g:message code="flag.updated"/></span></app:isUpdatedRecently>
-	            </td>
-	            <td>${contact.name}</td>
-	            <td style="color: #AAA; text-align: right; white-space: nowrap;"><prettytime:display date="${contact.lastUpdated}" /></td>
-	        </tr>
-	        </g:each>
-	        </table>
+			<g:render template="/contact/list" model="[contacts:recentContacts]" />
  	    </sec:ifLoggedIn>
 	</body>
 </html>
