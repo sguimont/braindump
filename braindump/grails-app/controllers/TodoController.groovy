@@ -8,11 +8,11 @@ import com.mushcorp.lt.artefact.Todo
 @Secured(["hasRole('ROLE_USER')"])
 class TodoController {
 	def index() {
-		def recentTodos = Todo.withCriteria {
+		def todos = Todo.withCriteria {
 			order("dateCreated", "desc")
 		}
 		
-		render(view:"index", model:[recentTodos: recentTodos])
+		render(view:"index", model:[todos: todos])
 	}
 
 	def create() {

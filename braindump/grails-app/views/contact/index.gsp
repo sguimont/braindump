@@ -57,6 +57,6 @@
                 <g:submitButton class="btn primary" name="create" value="${message(code:'default.button.create.label')}" />
             </fieldset>
 		</g:form>
-		<g:render template="/contact/list" model="[contacts:recentContacts]" />
+		<g:render template="/contact/list" model="[contacts:contacts]" />
 	</body>
 </html>

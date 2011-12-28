@@ -42,6 +42,6 @@
                 <g:submitButton class="btn primary" name="create" value="${message(code:'default.button.create.label')}" />
             </fieldset>
 		</g:form>
-		<g:render template="/note/list" model="[notes:recentNotes]" />
+		<g:render template="/note/list" model="[notes:notes]" />
 	</body>
 </html>

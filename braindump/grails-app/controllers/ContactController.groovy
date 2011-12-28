@@ -6,11 +6,11 @@ import com.mushcorp.lt.artefact.Contact
 class ContactController {
 
 	def index() {
-		def recentContacts = Contact.withCriteria {
+		def contacts = Contact.withCriteria {
 			order("dateCreated", "desc")
 		}
 
-		render(view:"index", model:[recentContacts: recentContacts])
+		render(view:"index", model:[contacts: contacts])
 	}
 
 	def create() {

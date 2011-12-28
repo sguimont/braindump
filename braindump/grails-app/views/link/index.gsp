@@ -49,6 +49,6 @@
                 <g:submitButton class="btn primary" name="create" value="${message(code:'default.button.create.label')}" />
             </fieldset>
 		</g:form>
-		<g:render template="/link/list" model="[links:recentLinks]" />
+		<g:render template="/link/list" model="[links:links]" />
 	</body>
 </html>

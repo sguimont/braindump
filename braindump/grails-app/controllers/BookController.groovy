@@ -6,11 +6,11 @@ import com.mushcorp.lt.artefact.Book
 class BookController {
 
 	def index() {
-		def recentBooks = Book.withCriteria {
+		def books = Book.withCriteria {
 			order("dateCreated", "desc")
 		}
 
-		render(view:"index", model:[recentBooks: recentBooks])
+		render(view:"index", model:[books: books])
 	}
 
 	def create() {
