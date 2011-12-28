@@ -52,9 +52,10 @@
 		</g:form>
 		<table id="books" class="condensed-table zebra-striped recentList">
 		<g:each in="${recentBooks}" var="book">
-		<tr bookId="${book._id}" rel="popover" data-content="${book.notes}">
+		<tr bookId="${book.id}" rel="popover" data-content="${book.notes}">
             <td class="flag">
-            	<app:isNew date="${book.lastUpdated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew>
+            	<app:isNew date="${book.dateCreated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew>
+            	<app:isUpdatedRecently dateCreated="${book.dateCreated}" lastUpdated="${book.lastUpdated}"><span class="label warning"><g:message code="flag.updated"/></span></app:isUpdatedRecently>
 			</td>
 			<td>
 				<g:link url="${book.bookUrl}" target="_blank">${book.title}</g:link><g:if test="${book.tags}"><br/>

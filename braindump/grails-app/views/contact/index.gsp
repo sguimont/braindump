@@ -59,9 +59,10 @@
 		</g:form>
 		<table id="contacts" class="condensed-table zebra-striped recentList">
 		<g:each in="${recentContacts}" var="contact">
-		<tr contactId="${contact._id}" rel="popover" data-content="${contact.notes}<br/><br/><b><g:message code="contact.mobilePhone.label"/>: </b>${contact.mobilePhone}<br/><b><g:message code="contact.homePhone.label"/>: </b>${contact.homePhone}<br/><b><g:message code="contact.workPhone.label"/>: </b>${contact.workPhone}">
+		<tr contactId="${contact.id}" rel="popover" data-content="${contact.notes}<br/><br/><b><g:message code="contact.mobilePhone.label"/>: </b>${contact.mobilePhone}<br/><b><g:message code="contact.homePhone.label"/>: </b>${contact.homePhone}<br/><b><g:message code="contact.workPhone.label"/>: </b>${contact.workPhone}">
             <td class="flag">
-            	<app:isNew date="${contact.lastUpdated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew>
+            	<app:isNew date="${contact.dateCreated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew>
+	            <app:isUpdatedRecently dateCreated="${contact.dateCreated}" lastUpdated="${contact.lastUpdated}"><span class="label warning"><g:message code="flag.updated"/></span></app:isUpdatedRecently>
             </td>
 			<td>
 				${contact.name}<g:if test="${contact.tags}"><br/>

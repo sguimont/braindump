@@ -11,6 +11,10 @@
  			 	timeFormat: 'h:m',
  			 	dateFormat: 'yy-mm-dd'
  			 });
+ 			 $("#completeForDateTime").datetimepicker({
+ 			 	timeFormat: 'h:m',
+ 			 	dateFormat: 'yy-mm-dd'
+ 			 });
  			 
  			 $('#todos tr').click(function() {
 			 	var todoId = $(this).attr('todoId')
@@ -36,8 +40,8 @@
                     <div class="input"><g:textField class="xlarge" name="todo" maxlength="100" /></div>
                 </div>
                 <div class="clearfix">
-                    <label for='to'><g:message code="todo.to.label"/></label>
-                    <div class="input"><g:textField class="large" name="to" maxlength="255" /></div>
+                    <label for='completeForDateTime'><g:message code="todo.completeFor.label"/></label>
+                    <div class="input"><g:textField class="medium" name="completeForDateTime" /></div>
                 </div>
                 <div class="clearfix">
                     <label for='reminderDateTime'><g:message code="todo.date.label"/></label>
@@ -62,13 +66,16 @@
 		
 		<table id="todos" class="condensed-table zebra-striped recentList">
 		<g:each in="${recentTodos}" var="todo">
-		<tr todoId="${todo._id}" rel="popover" data-content="${todo.notes}">
+		<tr todoId="${todo.id}" rel="popover" data-content="${todo.notes}">
             <td class="flag">
-            	<app:isNew date="${todo.lastUpdated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew>
+            	<app:isNew date="${todo.dateCreated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew>
+            	<app:isUpdatedRecently dateCreated="${todo.dateCreated}" lastUpdated="${todo.lastUpdated}"><span class="label warning"><g:message code="flag.updated"/></span></app:isUpdatedRecently>
+            	<g:if test="${todo.isLate()}"><span class="label important"><g:message code="flag.late"/></span></g:if>
+            	<g:if test="${todo.done}"><span class="label notice"><g:message code="flag.done"/></span></g:if>
             </td>
             <td>
             	<!-- FIXME (SG) : Translate the toto representation  -->
-            	${todo.todo}<g:if test="${todo.reminder}"> at <g:formatDate date="${todo.reminder}" format="yyyy-MM-dd HH:mm" /> in <prettytime:display date="${todo.reminder}" /></g:if>
+            	${todo.todo}<g:if test="${todo.completeFor}"> for <g:formatDate date="${todo.completeFor}" format="yyyy-MM-dd HH:mm" /> in <prettytime:display date="${todo.completeFor}" /></g:if>
             	<g:if test="${todo.tags}"><br/><g:each var="tag" in="${todo.tags}"><a href="<g:createLink controller="home" action="search" params="[tag:tag]"/>"><span class="label">${tag}</span></a>&nbsp;</g:each></g:if>
 			</td>
             <td style="color: #AAA; text-align: right; white-space: nowrap;">

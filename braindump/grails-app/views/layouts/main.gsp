@@ -13,7 +13,7 @@
 	<r:layoutResources />
 	<style type="text/css">
 		td.flag {
-			width: 28px;
+			width: 38px;
 		}
 	</style>
 	<g:layoutHead />

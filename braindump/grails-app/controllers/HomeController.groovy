@@ -14,12 +14,33 @@ class HomeController {
 		flash.info = null
 
 		if(springSecurityService.isLoggedIn()) {
+			def recentNotes = Note.withCriteria {
+				order("dateCreated", "desc")
+				maxResults(5)
+			}
+			def recentLinks = Link.withCriteria {
+				order("dateCreated", "desc")
+				maxResults(5)
+			}
+			def recentBooks = Book.withCriteria {
+				order("dateCreated", "desc")
+				maxResults(5)
+			}
+			def recentTodos = Todo.withCriteria {
+				order("dateCreated", "desc")
+				maxResults(5)
+			}
+			def recentContacts = Contact.withCriteria {
+				order("dateCreated", "desc")
+				maxResults(5)
+			}
+
 			render(view:"index", model: [
-						recentNotes: Note.collection.find().sort('dateCreated' : -1).limit(5),
-						recentLinks: Link.collection.find().sort('dateCreated' : -1).limit(5),
-						recentBooks: Book.collection.find().sort('dateCreated' : -1).limit(5),
-						recentTodos: Todo.collection.find().sort('dateCreated' : -1).limit(5),
-						recentContacts: Contact.collection.find().sort('dateCreated' : -1).limit(5)
+						recentNotes: recentNotes,
+						recentLinks: recentLinks,
+						recentBooks: recentBooks,
+						recentTodos: recentTodos,
+						recentContacts: recentContacts
 					])
 		}
 		else {

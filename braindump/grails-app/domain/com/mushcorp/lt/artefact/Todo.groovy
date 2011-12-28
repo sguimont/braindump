@@ -6,18 +6,25 @@ class Todo extends Artefact {
 
     String todo
     Date reminder
-    Date toComplete
-	
-	//boolean done
-
+    Date completeFor
+	Boolean done
 	String to
 
     static constraints = {
         todo(blank: false, size: 1..250)
         reminder(nullable: true)
+        completeFor(nullable: true)
+		done(nullable: true)
         to(nullable: true)
-        toComplete(nullable: true)
     }
+	
+	boolean isLate() {
+		if(completeFor && !done) {
+			return new Date() > completeFor
+		}
+		
+		return false
+	}
 
     static mapWith = "mongo"
 }

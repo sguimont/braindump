@@ -5,7 +5,11 @@ import com.mushcorp.lt.artefact.Note
 @Secured(["hasRole('ROLE_USER')"])
 class NoteController {
 	def index() {
-		render(view:"index", model:[recentNotes: Note.collection.find().sort('dateCreated': -1)])
+		def recentNotes = Note.withCriteria {
+			order("dateCreated", "desc")
+		}
+		
+		render(view:"index", model:[recentNotes: recentNotes])
 	}
 
 	def create() {

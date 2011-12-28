@@ -8,7 +8,11 @@ import com.mushcorp.lt.artefact.Todo
 @Secured(["hasRole('ROLE_USER')"])
 class TodoController {
 	def index() {
-		render(view:"index", model:[recentTodos: Todo.collection.find().sort('dateCreated': -1)])
+		def recentTodos = Todo.withCriteria {
+			order("dateCreated", "desc")
+		}
+		
+		render(view:"index", model:[recentTodos: recentTodos])
 	}
 
 	def create() {
@@ -17,7 +21,8 @@ class TodoController {
 		todo.updateTags(params.list('tag'))
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm")
-		todo.reminder = dateFormat.parse(params.reminderDateTime)
+		todo.reminder = params.reminderDateTime ? dateFormat.parse(params.reminderDateTime) : null
+		todo.completeFor = params.completeForDateTime ? dateFormat.parse(params.completeForDateTime) : null
 
 		if (todo.save()) {
 			flash.info = "Succesfully created the artefact"
@@ -47,7 +52,7 @@ class TodoController {
 		Todo todo = Todo.get(params.id)
 		if(todo) {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm")
-			render(view:"edit", model: [todo: todo, reminderDateTime: dateFormat.format(todo.reminder)])
+			render(view:"edit", model: [todo: todo, reminderDateTime: todo.reminder ? dateFormat.format(todo.reminder) : "", completeForDateTime: todo.completeFor ? dateFormat.format(todo.completeFor) : ""])
 		}
 		else {
 			flash.error = "Artefact '${params.id}' not found"
@@ -65,13 +70,16 @@ class TodoController {
 		todo.properties = params
 		todo.updateTags(params.list('tag'))
 
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm")
+		todo.reminder = params.reminderDateTime ? dateFormat.parse(params.reminderDateTime) : null
+		todo.completeFor = params.completeForDateTime ? dateFormat.parse(params.completeForDateTime) : null
+
 		if(todo.save()) {
 			flash.info = "Succesfully updated the artefact"
 			return redirect(action:"index")
 		}
 		else {
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm")
-			render(view:"edit", model: [todo: todo, reminderDateTime: dateFormat.format(todo.reminder)])
+			render(view:"edit", model: [todo: todo, reminderDateTime: todo.reminder ? dateFormat.format(todo.reminder) : "", completeForDateTime: todo.completeFor ? dateFormat.format(todo.completeFor) : ""])
 		}
 	}
 }

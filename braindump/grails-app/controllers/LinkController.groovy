@@ -5,7 +5,11 @@ import com.mushcorp.lt.artefact.Link
 @Secured(["hasRole('ROLE_USER')"])
 class LinkController {
 	def index() {
-		render(view:"index", model:[recentLinks: Link.collection.find().sort('dateCreated': -1)])
+		def recentLinks = Link.withCriteria {
+			order("dateCreated", "desc")
+		}
+
+		render(view:"index", model:[recentLinks: recentLinks])
 	}
 
 	def create() {

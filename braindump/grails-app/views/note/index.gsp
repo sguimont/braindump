@@ -44,9 +44,10 @@
 		</g:form>
 		<table id="notes" class="condensed-table zebra-striped recentList">
 		<g:each in="${recentNotes}" var="note">
-		<tr noteId="${note._id}">
+		<tr noteId="${note.id}">
             <td class="flag">
-            	<app:isNew date="${note.lastUpdated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew>
+            	<app:isNew date="${note.dateCreated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew>
+            	<app:isUpdatedRecently dateCreated="${note.dateCreated}" lastUpdated="${note.lastUpdated}"><span class="label warning"><g:message code="flag.updated"/></span></app:isUpdatedRecently>
             </td>
 			<td>
 				${note.notes.intro(60)}<g:if test="${note.tags}"><br/>
