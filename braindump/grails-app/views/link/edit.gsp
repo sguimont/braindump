@@ -14,6 +14,14 @@
 			<g:hiddenField name="id" value="${link.id}"/>
             <fieldset>
                 <div class="clearfix">
+                    <label for='title'><g:message code="link.title.label"/></label>
+                    <div class="input"><g:textField class="large" name="title" maxlength="100" value="${link.title}"/></div>
+                </div>
+                <div class="clearfix">
+                    <label for='url'><g:message code="link.url.label"/></label>
+                    <div class="input"><g:textField class="xlarge" name="url" maxlength="255" value="${link.url}"/></div>
+                </div>
+                <div class="clearfix">
                     <label for='notes'><g:message code="link.notes.label"/></label>
                     <div class="input"><g:textArea class="span7" name="notes" cols="50" rows="5" value="${link.notes}"/></div>
                 </div>

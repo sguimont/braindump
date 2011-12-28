@@ -6,6 +6,10 @@
 		<jq:jquery>
 			 $('#todoMenu').addClass("active")
 			 $("#pageHeader").html("<g:message code="todo.quote" encodeAs="JavaScript"/>")
+ 			 $("#reminderDateTime").datetimepicker({
+ 			 	timeFormat: 'h:m',
+ 			 	dateFormat: 'yy-mm-dd'
+ 			 });
 		</jq:jquery>
 	</head>
 	<body>
@@ -13,6 +17,18 @@
 		<g:form action="save" method="POST">
 			<g:hiddenField name="id" value="${todo.id}"/>
             <fieldset>
+                <div class="clearfix">
+                    <label for='title'><g:message code="todo.todo.label"/></label>
+                    <div class="input"><g:textField class="xlarge" name="todo" maxlength="100" value="${todo.todo}" /></div>
+                </div>
+                <div class="clearfix">
+                    <label for='to'><g:message code="todo.to.label"/></label>
+                    <div class="input"><g:textField class="large" name="c" maxlength="255" value="${todo.to}" /></div>
+                </div>
+                <div class="clearfix">
+                    <label for='reminderDateTime'><g:message code="todo.date.label"/></label>
+                    <div class="input"><g:textField class="medium" name="reminderDateTime" value="${reminderDateTime}" /></div>
+                </div>
                 <div class="clearfix">
                     <label for='notes'><g:message code="todo.notes.label"/></label>
                     <div class="input"><g:textArea class="span7" name="notes" cols="50" rows="5" value="${todo.notes}"/></div>

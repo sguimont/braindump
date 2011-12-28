@@ -6,15 +6,16 @@
 		<jq:jquery>
 			 $("#todoMenu").addClass("active")
 			 $("#pageHeader").html("<g:message code="todo.quote" encodeAs="JavaScript"/>")
+ 			 
  			 $("#reminderDateTime").datetimepicker({
  			 	timeFormat: 'h:m',
  			 	dateFormat: 'yy-mm-dd'
  			 });
+ 			 
  			 $('#todos tr').click(function() {
 			 	var todoId = $(this).attr('todoId')
 			 	window.location = '<g:createLink controller="todo" action="edit" />/' + todoId 
 			 });
- 			 
 		</jq:jquery>
 	</head>
 	<body>
@@ -49,6 +50,7 @@
                 <g:submitButton class="btn small primary" name="create" value="${message(code:'default.button.create.label')}" />
             </fieldset>
 		</g:form>
+		
 		<table id="todos" class="condensed-table zebra-striped recentList">
 		<g:each in="${recentTodos}" var="todo">
 		<tr todoId="${todo._id}"><!-- FIXME (SG) : Translate the toto representation  -->

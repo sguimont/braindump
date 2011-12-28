@@ -39,7 +39,9 @@ class TodoController {
 	}
 	
 	def edit() {
-		render(view:"edit", model: [todo: Todo.get(params.id)])
+		Todo todo = Todo.get(params.id)
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm")
+		render(view:"edit", model: [todo: todo, reminderDateTime: dateFormat.format(todo.reminder)])
 	}
 
 	def save() {
@@ -62,7 +64,8 @@ class TodoController {
 		else {
 			flash.error = "Cannot update artefact : " + todo.errors
 			println todo.errors
-			render(view:"edit", model: [todo: todo])
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm")
+			render(view:"edit", model: [todo: todo, reminderDateTime: dateFormat.format(todo.reminder)])
 		}
 	}
 }
