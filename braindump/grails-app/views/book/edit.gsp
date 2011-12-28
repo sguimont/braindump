@@ -15,25 +15,28 @@
             <fieldset>
                 <div class="clearfix">
                     <label for='title'><g:message code="book.title.label"/></label>
-                    <div class="input"><g:textField class="large" name="title" maxlength="100" value="${book.title}"/></div>
+                    <div class="input"><g:textField class="large" name="title" maxlength="100" value="${fieldValue(bean:book, field:"title")}"/></div>
                 </div>
                 <div class="clearfix">
                     <label for='url'><g:message code="book.url.label"/></label>
-                    <div class="input"><g:textField class="xlarge" name="bookUrl" maxlength="255" value="${book.bookUrl}"/></div>
+                    <div class="input"><g:textField class="xlarge" name="bookUrl" maxlength="255" value="${fieldValue(bean:book, field:"bookUrl")}"/></div>
                 </div>
                 <div class="clearfix">
                     <label for='notes'><g:message code="book.notes.label"/></label>
-                    <div class="input"><g:textArea class="span7" name="notes" cols="50" rows="5" value="${book.notes}"/></div>
+                    <div class="input"><g:textArea class="span7" name="notes" cols="50" rows="5" value="${fieldValue(bean:book, field:"notes")}"/></div>
                 </div>
                 <div class="clearfix">
                     <label for='tag'><g:message code="book.tags.label"/></label>
                     <div class="input">
+                    	<g:set var="count" value="${0}" />
                     	<g:each var="tag" in="${book.tags}">
 		                    <g:textField name="tag" class="small" value="${tag}" />
+	                    	<g:set var="count" value="${count + 1}" />
                     	</g:each>
-	                    <g:textField name="tag" class="small" />
-	                    <g:textField name="tag" class="small" />
-	                    <g:textField name="tag" class="small" />
+                    	<g:while test="${count < 8}">
+		                    <g:textField name="tag" class="small" />
+	                    	<g:set var="count" value="${count + 1}" />
+                    	</g:while>
 	                </div>
                 </div>
                 <div class="well" style="margin-right: 20px;">

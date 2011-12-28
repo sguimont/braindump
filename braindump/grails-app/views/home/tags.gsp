@@ -6,7 +6,7 @@
 			 0.66: '#0f0', // green
 			 1:    '#00f'  // blue
 			};
-		 $("#myCanvas").tagcanvas({weight: true, weightMode:'both', weightFrom: 'data-weight', weightSize: 15.0, weightGradient : gradient, shape: 'hcylinder'},'tags') 
+		 $("#myCanvas").tagcanvas({shape: "hcylinder", zoom: 2.0, freezeActive: true, weight: true, weightMode:'both', weightFrom: 'data-weight', weightSize: 7.0, weightGradient: gradient},'tags') 
 	</jq:jquery>
 	<h3><g:message code="tags.label" /></h3>
 	<div>

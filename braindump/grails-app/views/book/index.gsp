@@ -12,6 +12,14 @@
 			 	window.location = '<g:createLink controller="book" action="edit" />/' + bookId 
 			 });
 			 
+			  $("tr[rel=popover]").popover({
+				offset: 10,
+				html: true,
+				delayIn: 1000,
+				placement: "below",
+				title: function() { return "<g:message code="book.notes.label"/>" },
+                live: true
+              })
 		</jq:jquery>
 	</head>
 	<body>
@@ -44,10 +52,18 @@
 		</g:form>
 		<table id="books" class="condensed-table zebra-striped recentList">
 		<g:each in="${recentBooks}" var="book">
-		<tr bookId="${book._id}">
-            <td class="flag"><app:isNew date="${book.lastUpdated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew></td>
-			<td><g:link url="${book.bookUrl}" target="_blank">${book.title}</g:link><g:if test="${book.tags}"><br/><g:each var="tag" in="${book.tags}"><a href="<g:createLink controller="home" action="search" params="[tag:tag]"/>"><span class="label">${tag}</span></a>&nbsp;</g:each></g:if></td>
-            <td style="color: #AAA; text-align: right; white-space: nowrap;"><g:formatDate date="${book.lastUpdated}" format="yyyy-MM-dd HH:mm:ss" /><br/><prettytime:display date="${book.lastUpdated}" /></td>
+		<tr bookId="${book._id}" rel="popover" data-content="${book.notes}">
+            <td class="flag">
+            	<app:isNew date="${book.lastUpdated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew>
+			</td>
+			<td>
+				<g:link url="${book.bookUrl}" target="_blank">${book.title}</g:link><g:if test="${book.tags}"><br/>
+				<g:each var="tag" in="${book.tags}"><a href="<g:createLink controller="home" action="search" params="[tag:tag]"/>"><span class="label">${tag}</span></a>&nbsp;</g:each></g:if>
+			</td>
+            <td style="color: #AAA; text-align: right; white-space: nowrap;">
+            	<g:formatDate date="${book.lastUpdated}" format="yyyy-MM-dd HH:mm:ss" /><br/>
+            	<prettytime:display date="${book.lastUpdated}" />
+			</td>
 		</tr>
 		</g:each>
 		</table>
