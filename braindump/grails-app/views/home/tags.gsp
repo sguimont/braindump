@@ -15,7 +15,7 @@
 		<div id="tags">
 		 	<ul>
 		      <g:each var="tag" in="${tags}">
-				<li><a href="<g:createLink controller="home" action="search" params="[tag:tag._id]"/>" style="font-size: <g:formatNumber number="${tag.value.count}" maxFractionDigits="0"/>ex" data-weight="<g:formatNumber number="${tag.value.count}" maxFractionDigits="0"/>">${tag._id}</a></li>
+				<li><a href="<g:createLink controller="home" action="search" params="[tag:tag._id]"/>" data-weight="<g:formatNumber number="${tag.value.count}" maxFractionDigits="0"/>">${tag._id}</a></li>
 		      </g:each>
 			</ul>
 		</div>
