@@ -5,7 +5,7 @@ import org.bson.types.ObjectId;
 
 class Comment  {
 	ObjectId id
-	
+
 	String comment
 	Date dateCreated
 

@@ -9,6 +9,8 @@ class HomeController {
 	def springSecurityService
 
 	def index() {
+		withMobileDevice { redirect(controller:"mobile")	 }
+
 		flash.error = null
 		flash.warning = null
 		flash.info = null
@@ -72,13 +74,13 @@ class HomeController {
 			}
 
 			render(view:"index", model: [
-				recentNotes: tagNotes,
-				recentLinks: tagLinks,
-				recentBooks: tagBooks,
-				recentTodos: tagTodos,
-				recentContacts: tagContacts,
-				tag: params.tag
-			])
+						recentNotes: tagNotes,
+						recentLinks: tagLinks,
+						recentBooks: tagBooks,
+						recentTodos: tagTodos,
+						recentContacts: tagContacts,
+						tag: params.tag
+					])
 		}
 		else {
 			render(view:"index", model: [])
