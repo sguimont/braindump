@@ -71,4 +71,23 @@ class NoteController {
 			render(view:"edit", model:[note: note])
 		}
 	}
+	
+	def addComment() {
+		Note note = Note.get(params.id)
+		if(!note) {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
+
+		note.addComment(params.comment)
+
+		if(note.save()) {
+			flash.info = "Succesfully added the comment to artefact"
+			redirect(action:"edit", id: note.id)
+		}
+		else {
+			flash.error = "Cannot add comment to artefact : ${note.errors}"
+			render(view:"edit", model:[note: note])
+		}
+	}
 }

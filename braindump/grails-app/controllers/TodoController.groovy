@@ -82,4 +82,23 @@ class TodoController {
 			render(view:"edit", model: [todo: todo, reminderDateTime: todo.reminder ? dateFormat.format(todo.reminder) : "", completeForDateTime: todo.completeFor ? dateFormat.format(todo.completeFor) : ""])
 		}
 	}
+	
+	def addComment() {
+		Todo todo = Todo.get(params.id)
+		if(!todo) {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
+
+		todo.addComment(params.comment)
+
+		if(todo.save()) {
+			flash.info = "Succesfully added the comment to artefact"
+			redirect(action:"edit", id: todo.id)
+		}
+		else {
+			flash.error = "Cannot add comment to artefact : ${todo.errors}"
+			render(view:"edit", model:[todo: todo])
+		}
+	}
 }

@@ -11,7 +11,7 @@
 			</td>
             <td style="color: #AAA; text-align: right; white-space: nowrap;">
             	<g:formatDate date="${book.lastUpdated}" format="yyyy-MM-dd HH:mm:ss" /><br/>
-            	<prettytime:display date="${book.lastUpdated}" />
+            	<prettytime:display date="${book.lastUpdated}" /><span class="comment-count">${book.comments.size()}</span>
 			</td>
 		</tr>
 		</g:each>

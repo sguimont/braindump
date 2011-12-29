@@ -74,6 +74,14 @@
       a:hover {
       	text-decoration: none;
       }
+      
+      .comment-count {
+      	border: #AAA solid 1px;
+      	padding: 2px;
+      	background-color: white;
+      	color: #AAA;
+      	margin-left: 10px;
+      }
     </style>
 </head>
 <body>

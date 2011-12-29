@@ -71,4 +71,23 @@ class LinkController {
 			render(view:"edit", model:[link: link])
 		}
 	}
+	
+	def addComment() {
+		Link link = Link.get(params.id)
+		if(!link) {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
+
+		link.addComment(params.comment)
+
+		if(link.save()) {
+			flash.info = "Succesfully added the comment to artefact"
+			redirect(action:"edit", id: link.id)
+		}
+		else {
+			flash.error = "Cannot add comment to artefact : ${link.errors}"
+			render(view:"edit", model:[link: link])
+		}
+	}
 }

@@ -11,7 +11,7 @@
 			</td>
             <td style="color: #AAA; text-align: right; white-space: nowrap;">
             	<g:formatDate date="${link.lastUpdated}" format="yyyy-MM-dd HH:mm:ss" /><br/>
-            	<prettytime:display date="${link.lastUpdated}" />
+            	<prettytime:display date="${link.lastUpdated}" /><span class="comment-count">${link.comments.size()}</span>
             </td>
 		</tr>
 		</g:each>

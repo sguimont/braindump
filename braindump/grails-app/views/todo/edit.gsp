@@ -56,5 +56,8 @@
             </fieldset>
 		</g:form>
 		<g:render template="/templates/confirmationDeleteDialog" model="[controller:'todo', action:'delete', id:todo.id]" />
+
+		<g:render template="/templates/commentList" model="[comments:todo.comments]" />
+		<g:render template="/templates/commentAddForm" model="[id:todo.id]" />
 	</body>
 </html>

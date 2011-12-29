@@ -31,5 +31,8 @@
             </fieldset>
 		</g:form>
 		<g:render template="/templates/confirmationDeleteDialog" model="[controller:'note', action:'delete', id:note.id]" />
+
+		<g:render template="/templates/commentList" model="[comments:note.comments]" />
+		<g:render template="/templates/commentAddForm" model="[id:note.id]" />
 	</body>
 </html>

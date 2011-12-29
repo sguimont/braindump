@@ -72,4 +72,23 @@ class ContactController {
 			render(view:"edit", model:[contact: contact])
 		}
 	}
+	
+	def addComment() {
+		Contact contact = Contact.get(params.id)
+		if(!contact) {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
+
+		contact.addComment(params.comment)
+
+		if(contact.save()) {
+			flash.info = "Succesfully added the comment to artefact"
+			redirect(action:"edit", id: contact.id)
+		}
+		else {
+			flash.error = "Cannot add comment to artefact : ${contact.errors}"
+			render(view:"edit", model:[contact: contact])
+		}
+	}
 }
