@@ -32,7 +32,11 @@ class LoginController {
 			redirect uri: SpringSecurityUtils.securityConfig.successHandler.defaultTargetUrl
 		}
 		else {
-			redirect action: 'auth', params: params
+			def view = 'auth'
+			withMobileDevice  {
+				view = 'mobile/auth'
+			}
+			redirect action: view, params: params
 		}
 	}
 
@@ -40,7 +44,6 @@ class LoginController {
 	 * Show the login page.
 	 */
 	def auth = {
-
 		def config = SpringSecurityUtils.securityConfig
 
 		if (springSecurityService.isLoggedIn()) {
@@ -50,6 +53,10 @@ class LoginController {
 
 		String view = 'auth'
 		String postUrl = "${request.contextPath}${config.apf.filterProcessesUrl}"
+		
+		withMobileDevice  {
+			view = 'mobile/auth'
+		}
 		render view: view, model: [postUrl: postUrl,
 		                           rememberMeParameter: config.rememberMe.parameter]
 	}
@@ -78,7 +85,11 @@ class LoginController {
 	 */
 	def full = {
 		def config = SpringSecurityUtils.securityConfig
-		render view: 'auth', params: params,
+		def view = 'auth'
+		withMobileDevice  {
+			view = 'mobile/auth'
+		}
+		render view: view, params: params,
 			model: [hasCookie: authenticationTrustResolver.isRememberMe(SCH.context?.authentication),
 			        postUrl: "${request.contextPath}${config.apf.filterProcessesUrl}"]
 	}
@@ -114,7 +125,11 @@ class LoginController {
 		}
 		else {
 			flash.message = msg
-			redirect action: 'auth', params: params
+			def view = 'auth'
+			withMobileDevice  {
+				view = 'mobile/auth'
+			}
+			redirect action: view, params: params
 		}
 	}
 

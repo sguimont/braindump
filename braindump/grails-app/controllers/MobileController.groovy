@@ -1,9 +1,13 @@
+import grails.plugins.springsecurity.Secured
+
 import com.mushcorp.lt.artefact.Book
 import com.mushcorp.lt.artefact.Contact
 import com.mushcorp.lt.artefact.Link
 import com.mushcorp.lt.artefact.Note
 import com.mushcorp.lt.artefact.Todo
 
+
+@Secured(["hasRole('ROLE_USER')"])
 class MobileController {
 	def index() {
 		flash.error = null
