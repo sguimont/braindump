@@ -11,5 +11,9 @@ class Link extends Artefact {
         url(blank:false, size:1..255)
     }
 
-    static mapWith = "mongo"
+	static mapping = {
+		version false
+	}
+
+	static mapWith = "mongo"
 }

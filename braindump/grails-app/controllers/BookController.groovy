@@ -1,6 +1,7 @@
 import grails.plugins.springsecurity.Secured
 
 import com.mushcorp.lt.artefact.Book
+import com.mushcorp.lt.artefact.Comment;
 
 @Secured(["hasRole('ROLE_USER')"])
 class BookController {
@@ -69,6 +70,25 @@ class BookController {
 		}
 		else {
 			flash.error = "Cannot update artefact : ${book.errors}"
+			render(view:"edit", model:[book: book])
+		}
+	}
+	
+	def addComment() {
+		Book book = Book.get(params.id)
+		if(!book) {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
+
+		book.addComment(params.comment)
+
+		if(book.save()) {
+			flash.info = "Succesfully added the comment to artefact"
+			render(view:"edit", model:[book: book])
+		}
+		else {
+			flash.error = "Cannot add comment to artefact : ${book.errors}"
 			render(view:"edit", model:[book: book])
 		}
 	}

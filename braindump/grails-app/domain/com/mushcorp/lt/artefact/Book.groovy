@@ -11,5 +11,9 @@ class Book extends Artefact {
         bookUrl(blank:false, size:1..255)
     }
 	
+	static mapping = {
+		version false
+	}
+
     static mapWith = "mongo"
 }

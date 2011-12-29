@@ -31,13 +31,28 @@
 						<g:render template="/templates/editTags" model="[tags:book.tags]" />
 					</div>
                 </div>
-                <div class="well" style="margin-right: 20px;">
-	                <g:submitButton class="btn primary" name="save" value="${message(code:'default.button.update.label')}" />
-	                <g:link class="btn" name="cancel" controller="book"><g:message code="default.button.cancel.label"/></g:link>
-	                <a id="deleteButton" style="float: right;" class="btn danger" data-controls-modal="delete-confirm-modal" data-backdrop="true" data-keyboard="true"><g:message code="default.button.delete.label"/></a> 
-                </div>
             </fieldset>
+            <div class="well" style="margin-right: 20px;">
+	             <g:submitButton class="btn primary" name="save" value="${message(code:'default.button.update.label')}" />
+	             <g:link class="btn" name="cancel" controller="book"><g:message code="default.button.cancel.label"/></g:link>
+	             <a id="deleteButton" style="float: right;" class="btn danger" data-controls-modal="delete-confirm-modal" data-backdrop="true" data-keyboard="true"><g:message code="default.button.delete.label"/></a> 
+            </div>
 		</g:form>
 		<g:render template="/templates/confirmationDeleteDialog" model="[controller:'book', action:'delete', id:book.id]" />
+		
+		<g:render template="/templates/commentList" model="[comments:book.comments]" />
+		
+		<g:form action="addComment" method="POST">
+			<g:hiddenField name="id" value="${book.id}"/>
+            <fieldset>
+                <div class="clearfix">
+                    <label for='comment'><g:message code="book.comment.label"/></label>
+                    <div class="input"><g:textArea class="span7" name="comment" cols="50" rows="5" /></div>
+                </div>
+            </fieldset>
+            <div class="well" style="margin-right: 20px;">
+            	<g:submitButton class="btn primary" name="addComment" value="${message(code:'default.button.comment.label')}" />
+	        </div>
+		</g:form>
 	</body>
 </html>

@@ -2,7 +2,12 @@ package artefact
 
 import org.bson.types.ObjectId
 
+import com.mushcorp.lt.artefact.Comment
+
 abstract class Artefact {
+
+	static hasMany = [comments:Comment]
+
 	ObjectId id
 
 	String notes
@@ -29,8 +34,26 @@ abstract class Artefact {
 		}
 	}
 
+	void addComment(String comment) {
+		Comment newComment = new Comment()
+		newComment.comment = comment
+		newComment.dateCreated = new Date()
+
+		if(comments == null) {
+			comments = new ArrayList<Comment>()
+		}
+		comments.add(newComment)
+	}
+
 	static constraints = {
 		notes(nullable: true, blank:true, size:0..50000)
+	}
+
+	static embedded = ['comments']
+
+	static mapping = {
+		dateCreated index:true
+		version false
 	}
 
 	static mapWith = "mongo"

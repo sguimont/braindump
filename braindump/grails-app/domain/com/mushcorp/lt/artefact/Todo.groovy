@@ -26,5 +26,9 @@ class Todo extends Artefact {
 		return false
 	}
 
-    static mapWith = "mongo"
+	static mapping = {
+		version false
+	}
+
+	static mapWith = "mongo"
 }

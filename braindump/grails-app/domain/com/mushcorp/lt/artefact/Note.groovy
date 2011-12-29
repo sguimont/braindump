@@ -7,5 +7,9 @@ class Note extends Artefact {
     static constraints = {
     }
 
-    static mapWith = "mongo"
+	static mapping = {
+		version false
+	}
+
+	static mapWith = "mongo"
 }

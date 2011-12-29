@@ -15,5 +15,9 @@ class Contact extends Artefact {
 		workPhone(nullable:true)
 	}
 
+	static mapping = {
+		version false
+	}
+
 	static mapWith = "mongo"
 }
