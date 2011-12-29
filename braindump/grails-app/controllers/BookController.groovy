@@ -85,7 +85,7 @@ class BookController {
 
 		if(book.save()) {
 			flash.info = "Succesfully added the comment to artefact"
-			render(view:"edit", model:[book: book])
+			redirect(action:"edit", id: book.id)
 		}
 		else {
 			flash.error = "Cannot add comment to artefact : ${book.errors}"

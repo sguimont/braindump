@@ -41,18 +41,6 @@
 		<g:render template="/templates/confirmationDeleteDialog" model="[controller:'book', action:'delete', id:book.id]" />
 		
 		<g:render template="/templates/commentList" model="[comments:book.comments]" />
-		
-		<g:form action="addComment" method="POST">
-			<g:hiddenField name="id" value="${book.id}"/>
-            <fieldset>
-                <div class="clearfix">
-                    <label for='comment'><g:message code="book.comment.label"/></label>
-                    <div class="input"><g:textArea class="span7" name="comment" cols="50" rows="5" /></div>
-                </div>
-            </fieldset>
-            <div class="well" style="margin-right: 20px;">
-            	<g:submitButton class="btn primary" name="addComment" value="${message(code:'default.button.comment.label')}" />
-	        </div>
-		</g:form>
+		<g:render template="/templates/commentAddForm" model="[id:book.id]" />
 	</body>
 </html>
