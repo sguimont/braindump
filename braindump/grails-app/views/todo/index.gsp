@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-		<title><g:message code="application.title"/> - <g:message code="default.links.label"/></title>
+		<title><g:message code="application.title"/> - <g:message code="default.todos.label"/></title>
 		<jq:jquery>
 			 $("#todoMenu").addClass("active")
 			 $("#pageHeader").html("<g:message code="todo.quote" encodeAs="JavaScript"/>")

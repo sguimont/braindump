@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-		<title><g:message code="application.title"/> - <g:message code="default.links.label"/></title>
+		<title><g:message code="application.title"/> - <g:message code="default.contacts.label"/></title>
 		<jq:jquery>
 			 $('#contactMenu').addClass("active")
 			 $("#pageHeader").html("<g:message code="contact.quote" encodeAs="JavaScript"/>")
