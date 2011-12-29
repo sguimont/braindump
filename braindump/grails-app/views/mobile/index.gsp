@@ -28,9 +28,6 @@
 				<div data-role="content">	
 					<g:render template="/note/mobile/list" model="[notes:recentNotes]" />
 				</div>
-				<ul data-role="pagination">
-					<li class="ui-pagination-next"><a href="#link">Next</a></li>
-				</ul>
 				<div data-role="footer">
 					<h1>&copy; MushCorp 2011</h1>
 				</div> 	        
@@ -43,10 +40,6 @@
 				<div data-role="content">	
 					<g:render template="/link/mobile/list" model="[links:recentLinks]" />
 				</div>
-				<ul data-role="pagination">
-					<li class="ui-pagination-prev"><a href="#note">Prev</a></li>
-					<li class="ui-pagination-next"><a href="#book">Next</a></li>
-				</ul>
 				<div data-role="footer">
 					<h1>&copy; MushCorp 2011</h1>
 				</div> 	        
@@ -59,10 +52,6 @@
 				<div data-role="content">	
 	       			<g:render template="/book/mobile/list" model="[books:recentBooks]" />
 	       		</div>
-				<ul data-role="pagination">
-					<li class="ui-pagination-prev"><a href="#link">Prev</a></li>
-					<li class="ui-pagination-next"><a href="#todo">Next</a></li>
-				</ul>
 				<div data-role="footer">
 					<h1>&copy; MushCorp 2011</h1>
 				</div> 	        
@@ -75,10 +64,6 @@
   				<div data-role="content">	
 					<g:render template="/todo/mobile/list" model="[todos:recentTodos]" />
 				</div>		
-				<ul data-role="pagination">
-					<li class="ui-pagination-prev"><a href="#book">Prev</a></li>
-					<li class="ui-pagination-next"><a href="#contact">Next</a></li>
-				</ul>
 				<div data-role="footer">
 					<h1>&copy; MushCorp 2011</h1>
 				</div> 	        
@@ -91,9 +76,6 @@
 				<div data-role="content">	
 					<g:render template="/contact/mobile/list" model="[contacts:recentContacts]" />
 				</div>
-				<ul data-role="pagination">
-					<li class="ui-pagination-prev"><a href="#todo">Prev</a></li>
-				</ul>
 				<div data-role="footer">
 					<h1>&copy; MushCorp 2011</h1>
 				</div> 	        
