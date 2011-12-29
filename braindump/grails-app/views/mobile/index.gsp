@@ -6,8 +6,9 @@
 	</head>
 	<body>
 			<div data-role="page" id="home">
-				<div data-role="header">
+				<div data-role="header" data-position="inline">
 					<h1><g:message code="application.title"/></h1>
+					<g:link controller="logout" rel="external" data-icon="star">Logout</g:link>
 				</div>
 				<ul data-role="listview">
 					<li><a href="#note"><g:message code="note.latest"/></a><span class="ui-li-count">${recentNotes.size()}</span></li>
@@ -21,9 +22,10 @@
 				</div> 	        
 			</div>
 			<div data-role="page" id="note">
-				<div data-role="header">
-					<h1><g:message code="note.latest"/></h1>
+				<div data-role="header" data-position="inline">
 					<a href="#home" data-icon="home">Home</a>
+					<h1><g:message code="note.latest"/></h1>
+					<g:link controller="logout" rel="external" data-icon="star">Logout</g:link>
 				</div>
 				<div data-role="content">	
 					<g:render template="/note/mobile/list" model="[notes:recentNotes]" />
@@ -33,9 +35,10 @@
 				</div> 	        
 			</div>
 			<div data-role="page" id="link">
-				<div data-role="header">
+				<div data-role="header" data-position="inline">
 					<h1><g:message code="link.latest"/></h1>
 					<a href="#home" data-icon="home">Home</a>
+					<g:link controller="logout" rel="external" data-icon="star">Logout</g:link>
 				</div>
 				<div data-role="content">	
 					<g:render template="/link/mobile/list" model="[links:recentLinks]" />
@@ -45,9 +48,10 @@
 				</div> 	        
 			</div>
 			<div data-role="page" id="book">
-				<div data-role="header">
+				<div data-role="header" data-position="inline">
 					<h1><g:message code="book.latest"/></h1>
 					<a href="#home" data-icon="home">Home</a>
+					<g:link controller="logout" rel="external" data-icon="star">Logout</g:link>
 				</div>
 				<div data-role="content">	
 	       			<g:render template="/book/mobile/list" model="[books:recentBooks]" />
@@ -57,9 +61,10 @@
 				</div> 	        
 			</div>
 			<div data-role="page" id="todo">
-				<div data-role="header">
+				<div data-role="header" data-position="inline">
 					<h1><g:message code="todo.latest"/></h1>
 					<a href="#home" data-icon="home">Home</a>
+					<g:link controller="logout" rel="external" data-icon="star">Logout</g:link>
 				</div>
   				<div data-role="content">	
 					<g:render template="/todo/mobile/list" model="[todos:recentTodos]" />
@@ -69,9 +74,10 @@
 				</div> 	        
 			</div>	        
 			<div data-role="page" id="contact">
-				<div data-role="header">
+				<div data-role="header" data-position="inline">
 					<h1><g:message code="contact.latest"/></h1>
 					<a href="#home" data-icon="home">Home</a>
+					<g:link controller="logout" rel="external" data-icon="star">Logout</g:link>
 				</div>
 				<div data-role="content">	
 					<g:render template="/contact/mobile/list" model="[contacts:recentContacts]" />

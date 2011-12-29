@@ -28,14 +28,15 @@ class LoginController {
 	 * Default action; redirects to 'defaultTargetUrl' if logged in, /login/auth otherwise.
 	 */
 	def index = {
+		def view = 'auth'
+		withMobileDevice  {
+			view = 'mobile/auth'
+		}
+
 		if (springSecurityService.isLoggedIn()) {
 			redirect uri: SpringSecurityUtils.securityConfig.successHandler.defaultTargetUrl
 		}
 		else {
-			def view = 'auth'
-			withMobileDevice  {
-				view = 'mobile/auth'
-			}
 			redirect action: view, params: params
 		}
 	}
@@ -52,11 +53,11 @@ class LoginController {
 		}
 
 		String view = 'auth'
-		String postUrl = "${request.contextPath}${config.apf.filterProcessesUrl}"
-		
 		withMobileDevice  {
 			view = 'mobile/auth'
 		}
+
+		String postUrl = "${request.contextPath}${config.apf.filterProcessesUrl}"
 		render view: view, model: [postUrl: postUrl,
 		                           rememberMeParameter: config.rememberMe.parameter]
 	}
@@ -78,6 +79,12 @@ class LoginController {
 			// have cookie but the page is guarded with IS_AUTHENTICATED_FULLY
 			redirect action: 'full', params: params
 		}
+
+		String view = 'denied'
+		withMobileDevice  {
+			view = 'mobile/denied'
+		}
+		render(view:view)
 	}
 
 	/**
@@ -98,7 +105,6 @@ class LoginController {
 	 * Callback after a failed login. Redirects to the auth page with a warning message.
 	 */
 	def authfail = {
-
 		def username = session[UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY]
 		String msg = ''
 		def exception = session[WebAttributes.AUTHENTICATION_EXCEPTION]
@@ -125,11 +131,7 @@ class LoginController {
 		}
 		else {
 			flash.message = msg
-			def view = 'auth'
-			withMobileDevice  {
-				view = 'mobile/auth'
-			}
-			redirect action: view, params: params
+			redirect action: 'auth', params: params
 		}
 	}
 
