@@ -108,6 +108,7 @@
 	          <form action="${request.contextPath}${SpringSecurityUtils.securityConfig.apf.filterProcessesUrl}" class="pull-right" method="POST">
 	            <input class="input-small" type="text" name="j_username" placeholder="Username">
 	            <input class="input-small" type="password" name="j_password" placeholder="Password">
+                <input name='_spring_security_remember_me' type="hidden" value="true">
 	            <button class="btn" type="submit"><g:message code="signin.button"/></button>
 	          </form>
           </sec:ifNotLoggedIn>

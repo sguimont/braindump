@@ -8,7 +8,8 @@ class Comment  {
 
 	String comment
 	Date dateCreated
-
+	Date lastUpdated
+	
 	static constraints = {
 		comment(blank:false, size:1..1000)
 	}

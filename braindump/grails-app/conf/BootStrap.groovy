@@ -32,7 +32,7 @@ class BootStrap {
 		def adminAccount = Account.findByUsername('admin')
 		if(!adminAccount) {
 			println "Create Admin Account"
-			new Account(firstName:"admin", lastName:"admin", username:"admin", password:springSecurityService.encodePassword("admin","admin"), enabled:true, accountExpired:false, accountLocked:false, passwordExpired:false, authorities:[userRole, adminRole]).save()
+			new Account(firstName:"Administrator", lastName:"Administrator", username:"admin", password:springSecurityService.encodePassword("salut99","admin"), enabled:true, accountExpired:false, accountLocked:false, passwordExpired:false, authorities:[userRole, adminRole]).save()
 		}
 		else {
 			println "Update Admin Account"
@@ -40,6 +40,13 @@ class BootStrap {
 			adminAccount.addToAuthorities(adminRole)
 			adminAccount.password = springSecurityService.encodePassword("salut99","admin")
 			adminAccount.save()
+		}
+
+		println "Check sguimont Account"
+		def sguimontAccount = Account.findByUsername('sguimont')
+		if(!sguimontAccount) {
+			println "Create sguimont Account"
+			new Account(firstName:"Sébastien", lastName:"Guimont", username:"sguimont", password:springSecurityService.encodePassword("salut99","sguimont"), enabled:true, accountExpired:false, accountLocked:false, passwordExpired:false, authorities:[userRole, adminRole]).save()
 		}
 	}
 

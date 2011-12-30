@@ -92,4 +92,42 @@ class BookController {
 			render(view:"edit", model:[book: book])
 		}
 	}
+
+	def updateComment() {
+		Book book = Book.get(params.id)
+		if(!book) {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
+
+		book.updateComment(Integer.valueOf(params.index), params.comment)
+
+		if(book.save()) {
+			flash.info = "Succesfully updated the comment fromt artefact"
+			redirect(action:"edit", id: book.id)
+		}
+		else {
+			flash.error = "Cannot update comment from artefact : ${book.errors}"
+			render(view:"edit", model:[book: book])
+		}
+	}
+
+	def deleteComment() {
+		Book book = Book.get(params.id)
+		if(!book) {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
+
+		book.deleteComment(Integer.valueOf(params.index))
+
+		if(book.save()) {
+			flash.info = "Succesfully removed the comment fromt artefact"
+			redirect(action:"edit", id: book.id)
+		}
+		else {
+			flash.error = "Cannot remove comment from artefact : ${book.errors}"
+			render(view:"edit", model:[book: book])
+		}
+	}
 }

@@ -38,11 +38,22 @@ abstract class Artefact {
 		Comment newComment = new Comment()
 		newComment.comment = comment
 		newComment.dateCreated = new Date()
-
+		newComment.lastUpdated = new Date()
+		
 		if(comments == null) {
 			comments = new ArrayList<Comment>()
 		}
 		comments.add(newComment)
+	}
+	
+	void updateComment(int index, String comment) {
+		Comment theComment = comments.get(index)
+		theComment.comment = comment
+		theComment.lastUpdated = new Date()
+	}
+
+	void deleteComment(int index) {
+		comments.remove(index)
 	}
 
 	static constraints = {
