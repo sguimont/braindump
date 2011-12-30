@@ -2,7 +2,6 @@
 				<div data-role="header" data-position="inline">
 					<a href="#link" data-icon="arrow-u"><g:message code="link.latest"/></a>
 					<h1>${link.title}</h1>
-					<g:link controller="logout" rel="external" data-icon="star">Logout</g:link>
 				</div>
 				<div data-role="content">
 					<p><a href="${link.url}" rel="external">Go to Link</a></p>	

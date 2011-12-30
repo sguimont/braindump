@@ -1,8 +1,7 @@
 			<div data-role="page" id="note-${note.id}">
 				<div data-role="header" data-position="inline">
 					<a href="#note" data-icon="home"><g:message code="note.latest"/></a>
-					<h1>Note</h1>
-					<g:link controller="logout" rel="external" data-icon="star">Logout</g:link>
+					<h1><g:message code="note.title" /></h1>
 				</div>
 				<div data-role="content">	
 					<p style="white-space: pre;">${note.notes}</p>

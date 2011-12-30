@@ -12,6 +12,12 @@
 		h1 {
 			color: white;
 		}
+		
+		.right-note {
+			white-space: nowrap; 
+			margin-right: 20px; 
+			color: #AAA;
+		}
 	</style>
 </head>
 <body>

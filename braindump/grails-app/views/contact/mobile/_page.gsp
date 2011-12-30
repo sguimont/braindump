@@ -2,13 +2,12 @@
 				<div data-role="header" data-position="inline">
 					<a href="#contact" data-icon="home"><g:message code="contact.latest"/></a>
 					<h1>${contact.name}</h1>
-					<g:link controller="logout" rel="external" data-icon="star">Logout</g:link>
 				</div>
 				<div data-role="content">
 					<p>
-						<b><g:message code="contact.mobilePhone.label"/>: </b>${contact.mobilePhone}<br/>
-						<b><g:message code="contact.homePhone.label"/>: </b>${contact.homePhone}<br/>
-						<b><g:message code="contact.workPhone.label"/>: </b>${contact.workPhone}
+						<b><g:message code="contact.mobilePhone.label"/>: </b><a href="tel:${contact.mobilePhone}">${contact.mobilePhone}</a><br/>
+						<b><g:message code="contact.homePhone.label"/>: </b><a href="tel:${contact.homePhone}">${contact.homePhone}</a><br/>
+						<b><g:message code="contact.workPhone.label"/>: </b><a href="tel:${contact.workPhone}">${contact.workPhone}</a><br/>
 					</p>	
 					<p style="white-space: pre;">${contact.notes}</p>
 					<h3>Tags</h3>

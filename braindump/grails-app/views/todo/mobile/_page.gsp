@@ -1,8 +1,7 @@
 			<div data-role="page" id="todo-${todo.id}">
 				<div data-role="header" data-position="inline">
 					<a href="#todo" data-icon="home"><g:message code="todo.latest"/></a>
-					<h1>Todo</h1>
-					<g:link controller="logout" rel="external" data-icon="star">Logout</g:link>
+					<h1><g:message code="todo.title" /></h1>
 				</div>
 				<div data-role="content">
 					<g:if test="${todo.isLate()}"><span class="label important"><g:message code="flag.late"/></span></g:if>
