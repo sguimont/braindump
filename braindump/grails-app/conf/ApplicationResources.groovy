@@ -6,7 +6,6 @@ modules = {
 		
 		resource url:'js/jquery.tagcanvas.js', disposition: 'head'
 		
-		resource url:'js/jquery.autogrow.js', disposition: 'head'
 		resource url:'js/jquery.jeditable.js', disposition: 'head'
 
 		resource url:'js/jquery-ui-timepicker-addon.js', disposition: 'head'
