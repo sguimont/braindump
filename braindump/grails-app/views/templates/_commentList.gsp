@@ -4,11 +4,7 @@
 			      submit : 'OK',
 			      cancel : 'cancel',
  			        name : 'comment',
- 			        id   : 'index',
-			    autogrow : {
-					lineHeight : 16,
-					minHeight  : 32
-				}
+ 			        id   : 'index'
         	});
 		</jq:jquery>
 		<g:each status="index" in="${comments}" var="comment">

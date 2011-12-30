@@ -83,6 +83,13 @@
       	margin-left: 10px;
       }
       
+      .editable_textarea button {
+      	display: block;
+      	padding: 0px 10px 10px 0px;
+      	margin: 0px 10px 10px 0px;
+      	float: left;
+      }
+      
       .comment {
       	white-space: pre;
       }
