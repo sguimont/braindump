@@ -90,4 +90,41 @@ class LinkController {
 			render(view:"edit", model:[link: link])
 		}
 	}
+
+	def updateComment() {
+		Link link = Link.get(params.id)
+		if(!link) {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
+
+		link.updateComment(Integer.valueOf(params.index), params.comment)
+
+		if(link.save()) {
+			render(params.comment)
+		}
+		else {
+			flash.error = "Cannot update comment from artefact : ${link.errors}"
+			redirect(action:"edit", id:link.id)
+		}
+	}
+
+	def deleteComment() {
+		Link link = Link.get(params.id)
+		if(!link) {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
+
+		link.deleteComment(Integer.valueOf(params.index))
+
+		if(link.save()) {
+			flash.info = "Succesfully removed the comment fromt artefact"
+			redirect(action:"edit", id: link.id)
+		}
+		else {
+			flash.error = "Cannot remove comment from artefact : ${link.errors}"
+			render(view:"edit", model:[link: link])
+		}
+	}
 }

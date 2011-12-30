@@ -101,4 +101,41 @@ class TodoController {
 			render(view:"edit", model:[todo: todo])
 		}
 	}
+
+	def updateComment() {
+		Todo todo = Todo.get(params.id)
+		if(!todo) {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
+
+		todo.updateComment(Integer.valueOf(params.index), params.comment)
+
+		if(todo.save()) {
+			render(params.comment)
+		}
+		else {
+			flash.error = "Cannot update comment from artefact : ${todo.errors}"
+			redirect(action:"edit", id:todo.id)
+		}
+	}
+
+	def deleteComment() {
+		Todo todo = Todo.get(params.id)
+		if(!todo) {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
+
+		todo.deleteComment(Integer.valueOf(params.index))
+
+		if(todo.save()) {
+			flash.info = "Succesfully removed the comment fromt artefact"
+			redirect(action:"edit", id: todo.id)
+		}
+		else {
+			flash.error = "Cannot remove comment from artefact : ${todo.errors}"
+			render(view:"edit", model:[todo: todo])
+		}
+	}
 }

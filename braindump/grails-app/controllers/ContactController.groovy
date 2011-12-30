@@ -91,4 +91,41 @@ class ContactController {
 			render(view:"edit", model:[contact: contact])
 		}
 	}
+
+	def updateComment() {
+		Contact contact = Contact.get(params.id)
+		if(!contact) {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
+
+		contact.updateComment(Integer.valueOf(params.index), params.comment)
+
+		if(contact.save()) {
+			render(params.comment)
+		}
+		else {
+			flash.error = "Cannot update comment from artefact : ${contact.errors}"
+			redirect(action:"edit", id:contact.id)
+		}
+	}
+
+	def deleteComment() {
+		Contact contact = Contact.get(params.id)
+		if(!contact) {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
+
+		contact.deleteComment(Integer.valueOf(params.index))
+
+		if(contact.save()) {
+			flash.info = "Succesfully removed the comment fromt artefact"
+			redirect(action:"edit", id: contact.id)
+		}
+		else {
+			flash.error = "Cannot remove comment from artefact : ${contact.errors}"
+			render(view:"edit", model:[contact: contact])
+		}
+	}
 }

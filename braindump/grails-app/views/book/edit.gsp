@@ -40,7 +40,7 @@
 		</g:form>
 		<g:render template="/templates/confirmationDeleteDialog" model="[controller:'book', action:'delete', id:book.id]" />
 		
-		<g:render template="/templates/commentList" model="[comments:book.comments]" />
+		<g:render template="/templates/commentList" model="[controller:'book', id:book.id, comments:book.comments]" />
 		<g:render template="/templates/commentAddForm" model="[id:book.id]" />
 	</body>
 </html>

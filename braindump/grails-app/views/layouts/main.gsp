@@ -82,6 +82,10 @@
       	color: #AAA;
       	margin-left: 10px;
       }
+      
+      .comment {
+      	white-space: pre;
+      }
     </style>
 </head>
 <body>

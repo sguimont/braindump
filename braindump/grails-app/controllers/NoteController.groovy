@@ -90,4 +90,41 @@ class NoteController {
 			render(view:"edit", model:[note: note])
 		}
 	}
+
+	def updateComment() {
+		Note note = Note.get(params.id)
+		if(!note) {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
+
+		note.updateComment(Integer.valueOf(params.index), params.comment)
+
+		if(note.save()) {
+			render(params.comment)
+		}
+		else {
+			flash.error = "Cannot update comment from artefact : ${note.errors}"
+			redirect(action:"edit", id:note.id)
+		}
+	}
+
+	def deleteComment() {
+		Note note = Note.get(params.id)
+		if(!note) {
+			flash.error = "Artefact '${params.id}' not found"
+			redirect(action:"index")
+		}
+
+		note.deleteComment(Integer.valueOf(params.index))
+
+		if(note.save()) {
+			flash.info = "Succesfully removed the comment fromt artefact"
+			redirect(action:"edit", id: note.id)
+		}
+		else {
+			flash.error = "Cannot remove comment from artefact : ${note.errors}"
+			render(view:"edit", model:[note: note])
+		}
+	}
 }

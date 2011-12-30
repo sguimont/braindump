@@ -103,12 +103,11 @@ class BookController {
 		book.updateComment(Integer.valueOf(params.index), params.comment)
 
 		if(book.save()) {
-			flash.info = "Succesfully updated the comment fromt artefact"
-			redirect(action:"edit", id: book.id)
+			render(params.comment)
 		}
 		else {
 			flash.error = "Cannot update comment from artefact : ${book.errors}"
-			render(view:"edit", model:[book: book])
+			redirect(action:"edit", id:book.id)
 		}
 	}
 
