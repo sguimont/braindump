@@ -1,6 +1,6 @@
 <html>
 <head>
-	<meta name='layout' content='mobile'/>
+	<meta name='layout' content='auth-mobile'/>
 	<title><g:message code="application.title"/></title>
 	<jq:jquery>
 		$("input[type='checkbox']").prop("checked",true).checkboxradio("refresh");
@@ -17,9 +17,9 @@
 			</g:if>
 			<form action='${postUrl}' method='POST' data-ajax="false">
 				<label for='username'><g:message code="springSecurity.login.username.label"/></label>
-				<div class="input"><input type='text' class='xlarge' name='j_username' id='username'/></div>
+				<input type='text' name='j_username' id='username'/>
 				<label for='password'><g:message code="springSecurity.login.password.label"/></label>
-				<div class="input"><input type='password' class='xlarge' name='j_password' id='password'/></div>
+				<input type='password' name='j_password' id='password'/>
 			    <fieldset data-role="controlgroup">
 				   <legend></legend>
 				   <input type="checkbox" name="${rememberMeParameter}" id="${rememberMeParameter}" class="custom" />

@@ -1,6 +1,6 @@
 <head>
-	<meta name='layout' content='mobile' />
-	<title><g:message code="application.title"/> - <g:message code="springSecurity.denied.title" /></title>
+	<meta name='layout' content='auth-mobile' />
+	<title><g:message code="application.title"/></title>
 </head>
 <body>
 	<div data-role="page" id="loginerror">
