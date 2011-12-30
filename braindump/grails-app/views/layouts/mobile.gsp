@@ -8,6 +8,11 @@
 	<r:require modules="bootstrap, jquery-mobile, application-mobile" />
 	<r:layoutResources />
 	<g:layoutHead />
+	<style>
+		h1 {
+			color: white;
+		}
+	</style>
 </head>
 <body>
 	<g:layoutBody />
