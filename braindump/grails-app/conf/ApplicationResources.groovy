@@ -7,7 +7,12 @@ modules = {
 		resource url:'js/jquery.tagcanvas.js', disposition: 'head'
 		
 		resource url:'js/jquery.jeditable.js', disposition: 'head'
-
+		resource url:'js/jquery.jeditable.autogrow.js', disposition: 'head'
+		resource url:'js/jquery.jeditable.masked.js', disposition: 'head'
+		
+		resource url:'js/jquery.maskedinput-1.3.js', disposition: 'head'
+		resource url:'js/jquery.autogrow.js', disposition: 'head'
+		
 		resource url:'js/jquery-ui-timepicker-addon.js', disposition: 'head'
 		resource url:'css/jquery-ui-timepicker-addon.css', disposition: 'head'
     }

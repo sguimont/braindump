@@ -34,6 +34,9 @@
 					<h1>&copy; MushCorp 2011</h1>
 				</div> 	        
 			</div>
+			<g:each in="${recentNotes}" var="note">
+				<g:render template="/note/mobile/page" model="[note:note]" />
+			</g:each>
 			<div data-role="page" id="link">
 				<div data-role="header" data-position="inline">
 					<h1><g:message code="link.latest"/></h1>
@@ -47,6 +50,9 @@
 					<h1>&copy; MushCorp 2011</h1>
 				</div> 	        
 			</div>
+			<g:each in="${recentLinks}" var="link">
+				<g:render template="/link/mobile/page" model="[link:link]" />
+			</g:each>
 			<div data-role="page" id="book">
 				<div data-role="header" data-position="inline">
 					<h1><g:message code="book.latest"/></h1>
@@ -60,6 +66,9 @@
 					<h1>&copy; MushCorp 2011</h1>
 				</div> 	        
 			</div>
+			<g:each in="${recentBooks}" var="book">
+				<g:render template="/book/mobile/page" model="[book:book]" />
+			</g:each>
 			<div data-role="page" id="todo">
 				<div data-role="header" data-position="inline">
 					<h1><g:message code="todo.latest"/></h1>
@@ -73,6 +82,9 @@
 					<h1>&copy; MushCorp 2011</h1>
 				</div> 	        
 			</div>	        
+			<g:each in="${recentTodos}" var="todo">
+				<g:render template="/todo/mobile/page" model="[todo:todo]" />
+			</g:each>
 			<div data-role="page" id="contact">
 				<div data-role="header" data-position="inline">
 					<h1><g:message code="contact.latest"/></h1>
@@ -86,5 +98,8 @@
 					<h1>&copy; MushCorp 2011</h1>
 				</div> 	        
 			</div>
+			<g:each in="${recentContacts}" var="contact">
+				<g:render template="/contact/mobile/page" model="[contact:contact]" />
+			</g:each>
 	</body>
 </html>

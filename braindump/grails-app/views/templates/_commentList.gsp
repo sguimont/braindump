@@ -1,10 +1,14 @@
 		<jq:jquery>
 			 $(".editable_textarea").editable("<g:createLink controller="${controller}" action="updateComment" id="${id}"/>", { 
-			      type   : 'textarea',
+			      type   : 'autogrow',
 			      submit : 'OK',
 			      cancel : 'cancel',
  			        name : 'comment',
- 			        id   : 'index'
+ 			        id   : 'index',
+ 			    autogrow : {
+				           lineHeight : 16,
+				           minHeight  : 32
+	        			}
         	});
 		</jq:jquery>
 		<g:each status="index" in="${comments}" var="comment">
