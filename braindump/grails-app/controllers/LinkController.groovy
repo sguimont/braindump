@@ -4,8 +4,11 @@ import com.mushcorp.lt.artefact.Link
 
 @Secured(["hasRole('ROLE_USER')"])
 class LinkController {
+	def springSecurityService
+
 	def index() {
 		def links = Link.withCriteria {
+			eq("accountId", springSecurityService.currentUser.id.toString())
 			order("dateCreated", "desc")
 		}
 
@@ -15,6 +18,7 @@ class LinkController {
 	def create() {
 		Link link = new Link()
 		link.properties = params
+		link.accountId = springSecurityService.currentUser.id.toString()
 		link.updateTags(params.list('tag'))
 
 		if (link.save()) {
@@ -79,7 +83,7 @@ class LinkController {
 			redirect(action:"index")
 		}
 
-		link.addComment(params.comment)
+		link.addComment(params.comment, springSecurityService.currentUser.id.toString())
 
 		if(link.save()) {
 			flash.info = "Succesfully added the comment to artefact"

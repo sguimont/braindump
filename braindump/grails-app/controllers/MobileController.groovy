@@ -9,28 +9,31 @@ import com.mushcorp.lt.artefact.Todo
 
 @Secured(["hasRole('ROLE_USER')"])
 class MobileController {
-	def index() {
-		flash.error = null
-		flash.warning = null
-		flash.info = null
+	def springSecurityService
 
+	def index() {
 		def recentNotes = Note.withCriteria {
+			eq("accountId", springSecurityService.currentUser.id.toString())
 			order("dateCreated", "desc")
 			maxResults(10)
 		}
 		def recentLinks = Link.withCriteria {
+			eq("accountId", springSecurityService.currentUser.id.toString())
 			order("dateCreated", "desc")
 			maxResults(10)
 		}
 		def recentBooks = Book.withCriteria {
+			eq("accountId", springSecurityService.currentUser.id.toString())
 			order("dateCreated", "desc")
 			maxResults(10)
 		}
 		def recentTodos = Todo.withCriteria {
+			eq("accountId", springSecurityService.currentUser.id.toString())
 			order("dateCreated", "desc")
 			maxResults(10)
 		}
 		def recentContacts = Contact.withCriteria {
+			eq("accountId", springSecurityService.currentUser.id.toString())
 			order("dateCreated", "desc")
 			maxResults(10)
 		}

@@ -7,8 +7,10 @@ class Role implements Serializable {
 	String authority
 
 	static constraints = {
-		authority blank: false, unique: true
+		authority blank: false
 	}
-	
-    static mapWith = "mongo"
+
+	static mapping = { version false }
+
+	static mapWith = "mongo"
 }

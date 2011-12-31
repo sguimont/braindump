@@ -9,26 +9,32 @@ class HomeController {
 	def springSecurityService
 
 	def index() {
-		withMobileDevice { redirect(controller:"mobile")	 }
+	//withMobileDevice { redirect(controller:"mobile")	 }
 
 		if(springSecurityService.isLoggedIn()) {
 			def recentNotes = Note.withCriteria {
+				eq("accountId", springSecurityService.currentUser.id.toString())
 				order("dateCreated", "desc")
 				maxResults(5)
 			}
+			
 			def recentLinks = Link.withCriteria {
+				eq("accountId", springSecurityService.currentUser.id.toString())
 				order("dateCreated", "desc")
 				maxResults(5)
 			}
 			def recentBooks = Book.withCriteria {
+				eq("accountId", springSecurityService.currentUser.id.toString())
 				order("dateCreated", "desc")
 				maxResults(5)
 			}
 			def recentTodos = Todo.withCriteria {
+				eq("accountId", springSecurityService.currentUser.id.toString())
 				order("dateCreated", "desc")
 				maxResults(5)
 			}
 			def recentContacts = Contact.withCriteria {
+				eq("accountId", springSecurityService.currentUser.id.toString())
 				order("dateCreated", "desc")
 				maxResults(5)
 			}
@@ -49,22 +55,27 @@ class HomeController {
 	def search() {
 		if(springSecurityService.isLoggedIn()) {
 			def tagNotes = Note.withCriteria {
+				eq("accountId", springSecurityService.currentUser.id.toString())
 				eq("tags", params.tag)
 				order("dateCreated", "desc")
 			}
 			def tagLinks = Link.withCriteria {
+				eq("accountId", springSecurityService.currentUser.id.toString())
 				eq("tags", params.tag)
 				order("dateCreated", "desc")
 			}
 			def tagBooks = Book.withCriteria {
+				eq("accountId", springSecurityService.currentUser.id.toString())
 				eq("tags", params.tag)
 				order("dateCreated", "desc")
 			}
 			def tagTodos = Todo.withCriteria {
+				eq("accountId", springSecurityService.currentUser.id.toString())
 				eq("tags", params.tag)
 				order("dateCreated", "desc")
 			}
 			def tagContacts = Contact.withCriteria {
+				eq("accountId", springSecurityService.currentUser.id.toString())
 				eq("tags", params.tag)
 				order("dateCreated", "desc")
 			}
@@ -85,7 +96,7 @@ class HomeController {
 
 	def tags() {
 		if(springSecurityService.isLoggedIn()) {
-			[tags:TagStatistics.collection.find().sort('value' : -1)]
+			[tags:TagStatistics.collection.find(["value.accountIds":springSecurityService.currentUser.id.toString()])]
 		}
 		else {
 			[]

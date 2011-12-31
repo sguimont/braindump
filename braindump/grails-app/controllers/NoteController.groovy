@@ -4,8 +4,11 @@ import com.mushcorp.lt.artefact.Note
 
 @Secured(["hasRole('ROLE_USER')"])
 class NoteController {
+	def springSecurityService
+
 	def index() {
 		def notes = Note.withCriteria {
+			eq("accountId", springSecurityService.currentUser.id.toString())
 			order("dateCreated", "desc")
 		}
 		
@@ -15,6 +18,7 @@ class NoteController {
 	def create() {
 		Note note = new Note()
 		note.properties = params
+		note.accountId = springSecurityService.currentUser.id.toString()
 		note.updateTags(params.list('tag'))
 
 		if (note.save()) {
@@ -79,7 +83,7 @@ class NoteController {
 			redirect(action:"index")
 		}
 
-		note.addComment(params.comment)
+		note.addComment(params.comment, springSecurityService.currentUser.id.toString())
 
 		if(note.save()) {
 			flash.info = "Succesfully added the comment to artefact"

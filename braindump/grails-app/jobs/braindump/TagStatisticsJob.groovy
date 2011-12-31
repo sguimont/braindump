@@ -17,20 +17,22 @@ class TagStatisticsJob {
 	def execute() {
 		String m = """function() {
 		if(this.tags) {
-			this.tags.forEach(
-        		function(z) {
-            		emit( z , { count : 1 } );
-        		}
-			);
+			for(var i in this.tags) {
+        		emit(this.tags[i], { "accountIds": [this.accountId], "count" : 1 });
+			}
 		}
-} 
+}; 
 """
-		String r = """function(tag, values) {
-    var total = 0;
-    for (var i = 0; i < values.length; i++)
-        total += values[i].count;
-    return { count : total };
-}
+		String r = """function(tag, emits) {
+    var total = {"accountIds": [], "count": 0};
+    for (var i in emits) {
+		emits[i].accountIds.forEach(function(accountId) {
+			total.accountIds.push(accountId);
+		})
+        total.count += emits[i].count;
+	}
+    return total;
+};
 """
 		println "Generating tags statistics at ${new Date()}"
 		

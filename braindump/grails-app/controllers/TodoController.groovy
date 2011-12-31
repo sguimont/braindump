@@ -7,8 +7,11 @@ import com.mushcorp.lt.artefact.Todo
 
 @Secured(["hasRole('ROLE_USER')"])
 class TodoController {
+	def springSecurityService
+
 	def index() {
 		def todos = Todo.withCriteria {
+			eq("accountId", springSecurityService.currentUser.id.toString())
 			order("dateCreated", "desc")
 		}
 		
@@ -18,6 +21,7 @@ class TodoController {
 	def create() {
 		Todo todo = new Todo()
 		todo.properties = params
+		todo.accountId = springSecurityService.currentUser.id.toString()
 		todo.updateTags(params.list('tag'))
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm")
@@ -90,7 +94,7 @@ class TodoController {
 			redirect(action:"index")
 		}
 
-		todo.addComment(params.comment)
+		todo.addComment(params.comment, springSecurityService.currentUser.id.toString())
 
 		if(todo.save()) {
 			flash.info = "Succesfully added the comment to artefact"

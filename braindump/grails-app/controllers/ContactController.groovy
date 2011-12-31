@@ -4,9 +4,11 @@ import com.mushcorp.lt.artefact.Contact
 
 @Secured(["hasRole('ROLE_USER')"])
 class ContactController {
-
+	def springSecurityService
+	
 	def index() {
 		def contacts = Contact.withCriteria {
+			eq("accountId", springSecurityService.currentUser.id.toString())
 			order("dateCreated", "desc")
 		}
 
@@ -16,6 +18,7 @@ class ContactController {
 	def create() {
 		Contact contact = new Contact()
 		contact.properties = params
+		contact.accountId = springSecurityService.currentUser.id.toString()
 		contact.updateTags(params.list('tag'))
 
 		if (contact.save()) {
@@ -80,7 +83,7 @@ class ContactController {
 			redirect(action:"index")
 		}
 
-		contact.addComment(params.comment)
+		contact.addComment(params.comment, springSecurityService.currentUser.id.toString())
 
 		if(contact.save()) {
 			flash.info = "Succesfully added the comment to artefact"

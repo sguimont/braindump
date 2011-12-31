@@ -5,9 +5,12 @@ import com.mushcorp.lt.artefact.Comment;
 
 @Secured(["hasRole('ROLE_USER')"])
 class BookController {
-
+	def springSecurityService
+	
+	
 	def index() {
 		def books = Book.withCriteria {
+			eq("accountId", springSecurityService.currentUser.id.toString())
 			order("dateCreated", "desc")
 		}
 
@@ -17,6 +20,7 @@ class BookController {
 	def create() {
 		Book book = new Book()
 		book.properties = params
+		book.accountId = springSecurityService.currentUser.id.toString()
 		book.updateTags(params.list('tag'))
 
 		if (book.save()) {
@@ -81,7 +85,7 @@ class BookController {
 			redirect(action:"index")
 		}
 
-		book.addComment(params.comment)
+		book.addComment(params.comment, springSecurityService.currentUser.id.toString())
 
 		if(book.save()) {
 			flash.info = "Succesfully added the comment to artefact"
