@@ -35,4 +35,23 @@ class ProfileController {
 			render(view:"edit", model:[profile: profile])
 		}
 	}
+
+	def changePassword() {
+		Account profile = Account.get(params.id)
+		if(!profile) {
+			flash.error = "Profile '${params.id}' not found"
+			redirect(controller:"home")
+		}
+
+		profile.password = springSecurityService.encodePassword(params.password, profile.username)
+
+		if(profile.save()) {
+			flash.info = "Succesfully change the profile password"
+			redirect(action:"edit", id:params.id)
+		}
+		else {
+			flash.error = "Cannot change profile profile : ${profile.errors}"
+			redirect(action:"edit", id:params.id)
+		}
+	}
 }

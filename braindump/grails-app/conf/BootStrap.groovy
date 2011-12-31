@@ -54,6 +54,7 @@ class BootStrap {
 			println "Update sguimont Account"
 			sguimontAccount.firstName = "Sébastien"
 			sguimontAccount.lastName = "Guimont"
+			sguimontAccount.password = springSecurityService.encodePassword("salut99","sguimont")
 			sguimontAccount.email = "sebastieng@sympatico.ca"
 			sguimontAccount.gmail = "sebastieng@sympatico.ca"
 			sguimontAccount.save()

@@ -1,6 +1,6 @@
 <div id="delete-confirm-modal" class="modal hide fade">
 	<div class="modal-header">
-	<a href="#" class="close">&times;</a>
+		<a href="#" class="close">&times;</a>
 		<h3><g:message code="modal.delete.confirmation.title"/></h3>
 	</div>
 	<div class="modal-body">
