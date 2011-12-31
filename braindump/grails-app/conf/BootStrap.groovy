@@ -39,6 +39,8 @@ class BootStrap {
 			adminAccount.addToAuthorities(userRole)
 			adminAccount.addToAuthorities(adminRole)
 			adminAccount.password = springSecurityService.encodePassword("salut99","admin")
+			adminAccount.firstName = "Adminsitrator"
+			adminAccount.lastName = "Administrator"
 			adminAccount.save()
 		}
 
@@ -46,7 +48,15 @@ class BootStrap {
 		def sguimontAccount = Account.findByUsername('sguimont')
 		if(!sguimontAccount) {
 			println "Create sguimont Account"
-			new Account(firstName:"Sébastien", lastName:"Guimont", username:"sguimont", password:springSecurityService.encodePassword("salut99","sguimont"), enabled:true, accountExpired:false, accountLocked:false, passwordExpired:false, authorities:[userRole, adminRole]).save()
+			new Account(firstName:"Sébastien", lastName:"Guimont", username:"sguimont", email:"sebastieng@sympatico.ca", gmail:"sebastieng@sympatico.ca", password:springSecurityService.encodePassword("salut99","sguimont"), enabled:true, accountExpired:false, accountLocked:false, passwordExpired:false, authorities:[userRole, adminRole]).save()
+		}
+		else {
+			println "Update sguimont Account"
+			sguimontAccount.firstName = "Sébastien"
+			sguimontAccount.lastName = "Guimont"
+			sguimontAccount.email = "sebastieng@sympatico.ca"
+			sguimontAccount.gmail = "sebastieng@sympatico.ca"
+			sguimontAccount.save()
 		}
 	}
 

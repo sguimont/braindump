@@ -11,10 +11,6 @@ class HomeController {
 	def index() {
 		withMobileDevice { redirect(controller:"mobile")	 }
 
-		flash.error = null
-		flash.warning = null
-		flash.info = null
-
 		if(springSecurityService.isLoggedIn()) {
 			def recentNotes = Note.withCriteria {
 				order("dateCreated", "desc")

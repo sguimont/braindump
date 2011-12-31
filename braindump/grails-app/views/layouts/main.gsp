@@ -99,7 +99,7 @@
     <div class="topbar">
       <div class="fill">
         <div class="container">
-          <g:link controller="home" class="brand">Brain Dump</g:link>
+          <g:link controller="home" class="brand"><g:message code="application.title"/></g:link>
           <ul class="nav">
             <li id="homeMenu"><g:link controller="home"><g:message code="default.home.label"/></g:link></li>
           <sec:ifLoggedIn>
@@ -112,6 +112,7 @@
           </ul>
           <sec:ifLoggedIn>
           <ul class="nav secondary-nav">
+            <li id="profileMenu"><g:link controller="profile" action="edit" id="${sec.loggedInUserInfo(field:'id')}"><g:message code="default.profile.label"/></g:link></li>
             <li><g:link controller="logout"><g:message code="default.logout.label"/> <sec:username/> </g:link></li>
           </ul>
           </sec:ifLoggedIn>

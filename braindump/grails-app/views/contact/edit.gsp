@@ -30,11 +30,11 @@
                     <div class="input"><g:textField class="small" name="workPhone" maxlength="50" value="${contact.workPhone}"/></div>
                 </div>
                 <div class="clearfix">
-                    <label for='workPhone'><g:message code="contact.email.label"/></label>
+                    <label for='email'><g:message code="contact.email.label"/></label>
                     <div class="input"><g:textField class="large" name="email" maxlength="255" value="${contact.email}"/></div>
                 </div>
                 <div class="clearfix">
-                    <label for='workPhone'><g:message code="contact.gmail.label"/></label>
+                    <label for='gmail'><g:message code="contact.gmail.label"/></label>
                     <div class="input"><g:textField class="large" name="gmail" maxlength="255" value="${contact.gmail}"/></div>
                 </div>
                 <div class="clearfix">
