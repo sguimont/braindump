@@ -9,7 +9,9 @@ class HomeController {
 	def springSecurityService
 
 	def index() {
-	//withMobileDevice { redirect(controller:"mobile")	 }
+		withMobileDevice { 
+			return redirect(controller:"mobile")	 
+		}
 
 		if(springSecurityService.isLoggedIn()) {
 			def recentNotes = Note.withCriteria {
@@ -17,7 +19,7 @@ class HomeController {
 				order("dateCreated", "desc")
 				maxResults(5)
 			}
-			
+
 			def recentLinks = Link.withCriteria {
 				eq("accountId", springSecurityService.currentUser.id.toString())
 				order("dateCreated", "desc")
