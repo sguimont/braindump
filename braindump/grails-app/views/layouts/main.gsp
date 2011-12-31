@@ -11,16 +11,15 @@
     <![endif]-->
 	<r:require modules="application, bootstrap, jquery, jquery-ui" />
 	<r:layoutResources />
-	<style type="text/css">
-		td.flag {
-			width: 38px;
-		}
-	</style>
 	<g:layoutHead />
 	<jq:jquery>
 		$(".alert-message").alert()
 	</jq:jquery>
     <style type="text/css">
+		td.flag {
+			width: 38px;
+		}
+
       /* Override some defaults */
       html, body {
         background-color: #eee;
