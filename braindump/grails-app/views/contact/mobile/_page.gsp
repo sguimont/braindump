@@ -9,6 +9,10 @@
 						<b><g:message code="contact.homePhone.label"/>: </b><a href="tel:${contact.homePhone}">${contact.homePhone}</a><br/>
 						<b><g:message code="contact.workPhone.label"/>: </b><a href="tel:${contact.workPhone}">${contact.workPhone}</a><br/>
 					</p>	
+					<p>
+						<b><g:message code="contact.email.label"/>: </b><a href="mailto:${contact.email}">${contact.email}</a><br/>
+						<b><g:message code="contact.gmail.label"/>: </b><a href="mailto:${contact.gmail}">${contact.gmail}</a><br/>
+					</p>	
 					<p style="white-space: pre;">${contact.notes}</p>
 					<h3>Tags</h3>
 					<g:each var="tag" in="${contact.tags}"><span class="label">${tag}</span>&nbsp;</g:each>

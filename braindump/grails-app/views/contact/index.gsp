@@ -42,6 +42,14 @@
                     <div class="input"><g:textField class="small" name="workPhone" maxlength="50" /></div>
                 </div>
                 <div class="clearfix">
+                    <label for='workPhone'><g:message code="contact.email.label"/></label>
+                    <div class="input"><g:textField class="large" name="email" maxlength="255" /></div>
+                </div>
+                <div class="clearfix">
+                    <label for='workPhone'><g:message code="contact.gmail.label"/></label>
+                    <div class="input"><g:textField class="large" name="gmail" maxlength="255" /></div>
+                </div>
+                <div class="clearfix">
                     <label for='url'><g:message code="contact.notes.label"/></label>
                     <div class="input"><g:textArea class="span7" name="notes" cols="50" rows="5" /></div>
                 </div>

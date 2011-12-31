@@ -1,6 +1,7 @@
 		<table id="contacts" class="condensed-table zebra-striped recentList">
 		<g:each in="${contacts}" var="contact">
-		<tr contactId="${contact.id}" rel="popover" data-content="${contact.notes}<br/><br/><b><g:message code="contact.mobilePhone.label"/>: </b>${contact.mobilePhone}<br/><b><g:message code="contact.homePhone.label"/>: </b>${contact.homePhone}<br/><b><g:message code="contact.workPhone.label"/>: </b>${contact.workPhone}">
+		<tr contactId="${contact.id}" rel="popover" 
+			data-content="${contact.notes}<br/><br/><b><g:message code="contact.mobilePhone.label"/>: </b>${contact.mobilePhone}<br/><b><g:message code="contact.homePhone.label"/>: </b>${contact.homePhone}<br/><b><g:message code="contact.workPhone.label"/>: </b>${contact.workPhone}<br/><br/><b><g:message code="contact.email.label"/>: </b>${contact.email}<br/><b><g:message code="contact.gmail.label"/>: </b>${contact.gmail}">
             <td class="flag">
             	<app:isNew date="${contact.dateCreated}"><span class="label success"><g:message code="flag.new"/></span></app:isNew>
 	            <app:isUpdatedRecently dateCreated="${contact.dateCreated}" lastUpdated="${contact.lastUpdated}"><span class="label warning"><g:message code="flag.updated"/></span></app:isUpdatedRecently>

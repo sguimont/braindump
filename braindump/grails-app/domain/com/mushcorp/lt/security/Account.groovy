@@ -13,6 +13,14 @@ class Account  implements Serializable {
 	boolean accountLocked
 	boolean passwordExpired
 
+	String firstName
+	String lastName
+
+	String mobilePhone
+	
+	String email
+	String gmail
+	
 	static hasMany = [authorities:Role]
 
 	static constraints = {
