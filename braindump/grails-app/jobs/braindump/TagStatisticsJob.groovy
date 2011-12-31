@@ -16,20 +16,30 @@ class TagStatisticsJob {
 	
 	def execute() {
 		String m = """function() {
-		if(this.tags) {
-			for(var i in this.tags) {
-        		emit(this.tags[i], { "accountIds": [this.accountId], "count" : 1 });
-			}
+		for(var i in this.tags) {
+    		emit(this.accountId, { "tags": [{"tag" : this.tags[i], "count" : 1 }] });
 		}
 }; 
 """
-		String r = """function(tag, emits) {
-    var total = {"accountIds": [], "count": 0};
+		String r = """function(accountId, emits) {
+    var total = {"tags": []};
     for (var i in emits) {
-		emits[i].accountIds.forEach(function(accountId) {
-			total.accountIds.push(accountId);
+		emits[i].tags.forEach(function(tagInfo) {
+
+			var currentTagInfo = null;
+			total.tags.forEach(function(totalTagInfo) {
+				if(totalTagInfo.tag == tagInfo.tag) {
+					currentTagInfo = totalTagInfo
+				}
+			})
+
+			if(currentTagInfo) {
+				currentTagInfo.count++;
+			}
+			else {
+				total.tags.push({"tag":tagInfo.tag, "count": tagInfo.count});
+			}
 		})
-        total.count += emits[i].count;
 	}
     return total;
 };

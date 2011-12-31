@@ -98,7 +98,8 @@ class HomeController {
 
 	def tags() {
 		if(springSecurityService.isLoggedIn()) {
-			[tags:TagStatistics.collection.find(["value.accountIds":springSecurityService.currentUser.id.toString()])]
+			def tagsStats = TagStatistics.collection.findOne(["_id" : springSecurityService.currentUser.id.toString()])
+			[tags:tagsStats.value.tags]
 		}
 		else {
 			[]
