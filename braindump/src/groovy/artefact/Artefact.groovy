@@ -54,6 +54,9 @@ abstract class Artefact {
 
 	void deleteComment(int index) {
 		comments.remove(index)
+		if(comments.isEmpty()) {
+			comments.clear()
+		}
 	}
 
 	static constraints = {

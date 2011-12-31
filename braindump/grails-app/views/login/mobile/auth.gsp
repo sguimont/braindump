@@ -17,9 +17,9 @@
 			</g:if>
 			<form action='${postUrl}' method='POST' data-ajax="false">
 				<label for='username'><g:message code="springSecurity.login.username.label"/></label>
-				<input type='text' name='j_username' id='username'/>
+				<input type='text' name='j_username' id='username' autocomplete="off"/>
 				<label for='password'><g:message code="springSecurity.login.password.label"/></label>
-				<input type='password' name='j_password' id='password'/>
+				<input type='password' name='j_password' id='password' autocomplete="off"/>
 			    <fieldset data-role="controlgroup">
 				   <legend></legend>
 				   <input type="checkbox" name="${rememberMeParameter}" id="${rememberMeParameter}" class="custom" />

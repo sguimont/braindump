@@ -51,21 +51,21 @@
 		            <fieldset>
 		                <div class="clearfix">
 		                    <label for='oldPassword'><g:message code="profile.password.old.label"/></label>
-		                    <div class="input"><g:textField class="large" name="oldPassword" /></div>
+		                    <div class="input"><g:passwordField class="large" name="oldPassword" autocomplete="off"/></div>
 		                </div>
 		                <div class="clearfix">
 		                    <label for='password'><g:message code="profile.password.new.label"/></label>
-		                    <div class="input"><g:textField class="large" name="password" /></div>
+		                    <div class="input"><g:passwordField class="large" name="password" autocomplete="off"/></div>
 		                </div>
 		                <div class="clearfix">
 		                    <label for='confirmPassword'><g:message code="profile.password.confirm.label"/></label>
-		                    <div class="input"><g:textField class="large" name="confirmPassword" /></div>
+		                    <div class="input"><g:passwordField class="large" name="confirmPassword" autocomplete="off"/></div>
 		                </div>
 		             </fieldset>
 				</div>
 				<div class="modal-footer">
 	                <g:submitButton class="btn primary" name="changePassword" value="${message(code:'default.button.change.password.label')}" />
-					<button class="btn secondary" onclick="$('#change-password-modal').modal('hide');"><g:message code="default.button.cancel.label"/></button>
+					<button class="btn secondary" onclick="$('#change-password-modal').modal('hide');return false;"><g:message code="default.button.cancel.label"/></button>
 				</div>
 			</g:form>
 		</div>

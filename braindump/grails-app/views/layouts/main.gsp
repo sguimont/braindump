@@ -108,7 +108,21 @@
             <li id="bookMenu"><g:link controller="book"><g:message code="default.books.label"/></g:link></li>
             <li id="todoMenu"><g:link controller="todo"><g:message code="default.todos.label"/></g:link></li>
             <li id="contactMenu"><g:link controller="contact"><g:message code="default.contacts.label"/></g:link></li>
-          </sec:ifLoggedIn>
+            <sec:ifAllGranted roles="ROLE_ADMIN">
+				<li class="dropdown" data-dropdown="dropdown">
+	              <a class="dropdown-toggle" href="#">Admin</a>
+	              <ul class="dropdown-menu">
+	                <li><a href="#">Configuration</a></li>
+	                <li class="divider"></li>
+	                <li><a href="#">Backup Data</a></li>
+	                <li><a href="#">Import Data</a></li>
+	                <li class="divider"></li>
+	                <li><a href="#">Monitoring</a></li>
+	                <li><a href="#">Statistics</a></li>
+	              </ul>
+	            </li>
+            </sec:ifAllGranted>
+            </sec:ifLoggedIn>
           </ul>
           <sec:ifLoggedIn>
           <ul class="nav secondary-nav">

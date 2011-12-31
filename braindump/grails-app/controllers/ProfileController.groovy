@@ -40,18 +40,27 @@ class ProfileController {
 		Account profile = Account.get(params.id)
 		if(!profile) {
 			flash.error = "Profile '${params.id}' not found"
-			redirect(controller:"home")
+			return redirect(controller:"home")
+		}
+		
+		if(params.password != params.confirmPassword) {
+			flash.error = "Confirm password not the same as new password"
+			return redirect(action:"edit", id:params.id)
+		}
+		if(profile.password != springSecurityService.encodePassword(params.oldPassword, profile.username)) {
+			flash.error = "Old password is not correct"
+			return redirect(action:"edit", id:params.id)
 		}
 
 		profile.password = springSecurityService.encodePassword(params.password, profile.username)
 
 		if(profile.save()) {
 			flash.info = "Succesfully change the profile password"
-			redirect(action:"edit", id:params.id)
+			return redirect(action:"edit", id:params.id)
 		}
 		else {
 			flash.error = "Cannot change profile profile : ${profile.errors}"
-			redirect(action:"edit", id:params.id)
+			return redirect(action:"edit", id:params.id)
 		}
 	}
 }

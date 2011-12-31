@@ -16,11 +16,11 @@
 		<fieldset>
 			<div class="clearfix">
 				<label for='username'><g:message code="springSecurity.login.username.label"/></label>
-				<div class="input"><input type='text' class='xlarge' name='j_username' id='username'/></div>
+				<div class="input"><input type='text' class='xlarge' name='j_username' id='username' autocomplete="off"/></div>
 			</div>
 			<div class="clearfix">
 				<label for='password'><g:message code="springSecurity.login.password.label"/></label>
-				<div class="input"><input type='password' class='xlarge' name='j_password' id='password'/></div>
+				<div class="input"><input type='password' class='xlarge' name='j_password' id='password' autocomplete="off"/></div>
 			</div>
 			<div class="clearfix">
 			 	<div class="input">
