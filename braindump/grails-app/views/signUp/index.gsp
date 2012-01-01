@@ -12,7 +12,7 @@
 			<div class='alert-message error'><span>${flash.message}</span></div>
 		</g:if>
 
-		<g:form controller="signUp" action="signup" method="POST">
+		<g:form controller="signUp" action="signUp" method="POST">
 		<fieldset>
 			<div class="clearfix">
 				<label for='username'><g:message code="springSecurity.login.username.label"/></label>
@@ -33,12 +33,5 @@
         </div>
 		</g:form>
 	</div>
-<script type='text/javascript'>
-	<!--
-	(function() {
-		document.forms['loginForm'].elements['j_username'].focus();
-	})();
-	// -->
-</script>
 </body>
 </html>

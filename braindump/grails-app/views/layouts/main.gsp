@@ -111,10 +111,12 @@
 				<li class="dropdown" data-dropdown="dropdown">
 	              <a class="dropdown-toggle" href="#">Admin</a>
 	              <ul class="dropdown-menu">
-	                <li><a href="#">Configuration</a></li>
+	                <li><g:link controller="admin">Configuration</g:link></li>
 	                <li class="divider"></li>
 	                <li><a href="#">Backup Data</a></li>
 	                <li><a href="#">Import Data</a></li>
+	                <li class="divider"></li>
+	                <li><g:link controller="SignUp">Signup</g:link></li>
 	                <li class="divider"></li>
 	                <li><g:link controller="quartz">Quartz</g:link></li>
 	                <li><g:link controller="monitoring">Monitoring</g:link></li>
