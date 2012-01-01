@@ -46,23 +46,18 @@ class TagStatisticsJob {
 """
 		println "Generating tags statistics at ${new Date()}"
 		
-		println "Note"
 		MapReduceCommand cmd = new MapReduceCommand(Note.collection, m, r, "tagStatistics", MapReduceCommand.OutputType.REPLACE, null);
 		MapReduceOutput out = Note.collection.mapReduce(cmd);
 
-		println "Book"
 		cmd = new MapReduceCommand(Book.collection, m, r, "tagStatistics", MapReduceCommand.OutputType.REDUCE, null);
 		out = Book.collection.mapReduce(cmd);
 
-		println "Link"
 		cmd = new MapReduceCommand(Link.collection, m, r, "tagStatistics", MapReduceCommand.OutputType.REDUCE, null);
 		out = Link.collection.mapReduce(cmd);
 
-		println "Todo"
 		cmd = new MapReduceCommand(Todo.collection, m, r, "tagStatistics", MapReduceCommand.OutputType.REDUCE, null);
 		out = Todo.collection.mapReduce(cmd);
 
-		println "Contact"
 		cmd = new MapReduceCommand(Contact.collection, m, r, "tagStatistics", MapReduceCommand.OutputType.REDUCE, null);
 		out = Contact.collection.mapReduce(cmd);
 		

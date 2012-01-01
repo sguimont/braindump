@@ -9,8 +9,8 @@ class HomeController {
 	def springSecurityService
 
 	def index() {
-		withMobileDevice { 
-			return redirect(controller:"mobile")	 
+		withMobileDevice {
+			return redirect(controller:"mobile")
 		}
 
 		if(springSecurityService.isLoggedIn()) {
@@ -99,10 +99,15 @@ class HomeController {
 	def tags() {
 		if(springSecurityService.isLoggedIn()) {
 			def tagsStats = TagStatistics.collection.findOne(["_id" : springSecurityService.currentUser.id.toString()])
-			[tags:tagsStats.value.tags]
+			if(tagsStats) {
+				[tags:tagsStats.value.tags]
+			}
+			else {
+				[tags:[]]
+			}
 		}
 		else {
-			[]
+			[tags:[]]
 		}
 	}
 }

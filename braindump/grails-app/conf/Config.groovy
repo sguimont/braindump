@@ -98,6 +98,10 @@ grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.mushcorp.lt.
 grails.plugins.springsecurity.authority.className = 'com.mushcorp.lt.security.Role'
 grails.plugins.springsecurity.password.encodeHashAsBase64 = true
 grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
+grails.plugins.springsecurity.controllerAnnotations.staticRules = [
+	'/monitoring/**': ['ROLE_ADMIN'],
+	'/quartz/**': ['ROLE_ADMIN'],
+]
 
 //configuration for gtalk accounts
 //xmpp.autoStartup=true
@@ -109,5 +113,5 @@ grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
 //xmpp.connection.SASLAuthenticationEnabled=false
 
 grails.plugin.cloudfoundry.username = 'sebastieng@sympatico.ca'
-grails.plugin.cloudfoundry.password = '4aUlhL1Y'
+grails.plugin.cloudfoundry.password = 'salut99'
 grails.plugin.cloudfoundry.appname = 'braindump'

@@ -32,6 +32,17 @@ class BootStrap {
 				println "Problem with admin account : ${adminAccount.errors}"
 			}
 		}
+
+		println "Check User Account"
+		def userAccount = Account.findByUsername('user')
+		if(!userAccount) {
+			println "Create User Account"
+			userAccount = new Account(firstName:"User", lastName:"User", username:"user", password:springSecurityService.encodePassword("salut99","user"), enabled:true, accountExpired:false, accountLocked:false, passwordExpired:false, authorities:[userRole])
+			if(!userAccount.save()) {
+				println "Problem with user account : ${userAccount.errors}"
+			}
+		}
+
 		println "Check sguimont Account"
 		def sguimontAccount = Account.findByUsername('sguimont')
 		if(!sguimontAccount) {

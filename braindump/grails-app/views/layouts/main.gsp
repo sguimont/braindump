@@ -116,7 +116,8 @@
 	                <li><a href="#">Backup Data</a></li>
 	                <li><a href="#">Import Data</a></li>
 	                <li class="divider"></li>
-	                <li><a href="#">Monitoring</a></li>
+	                <li><g:link controller="quartz">Quartz</g:link></li>
+	                <li><g:link controller="monitoring">Monitoring</g:link></li>
 	                <li><a href="#">Statistics</a></li>
 	              </ul>
 	            </li>
