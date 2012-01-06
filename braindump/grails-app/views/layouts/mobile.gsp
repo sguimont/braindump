@@ -11,12 +11,12 @@
 	
 	    var channel = pusher.subscribe('braindump');
 	    channel.bind('application', function(data) {
-	      alert(data);
+	      alert("Application\n\n" + data);
 	    });
 	    
 	    <sec:ifLoggedIn>	    
 		    channel.bind('<sec:username/>', function(data) {
-				alert(data);
+				alert("User\n\n" + data);
 		    });
 	    </sec:ifLoggedIn>	    
 	</script>

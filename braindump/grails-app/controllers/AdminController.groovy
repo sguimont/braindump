@@ -15,11 +15,21 @@ class AdminController {
 	}
 
 	def sendEvent() {
-		render pusherService.triggerPush("braindump", "application", "{ 'date' : '${new Date()}' }")
+		def result = pusherService.triggerPush("braindump", "application", "{ 'type' : 'application', 'date' : '${new Date()}' }")
+
+		flash.warning = "Pusher return value: ${result}"
+		redirect(action:"index")
 	}
 	
 	def sendUserEvent() {
-		render pusherService.triggerPush("braindump", params.username, "{ 'date' : '${new Date()}' }")
+		if (request.get) {
+			return	
+		}
+		
+		def result = pusherService.triggerPush("braindump", params.username, "{ 'type' : 'user', 'date' : '${new Date()}' }")
+		
+		flash.warning = "Pusher return value: ${result}"
+		redirect(action:"sendUserEvent")
 	}
 
 	def backup() {
