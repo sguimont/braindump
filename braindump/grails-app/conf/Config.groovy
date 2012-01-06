@@ -100,7 +100,7 @@ grails.plugins.springsecurity.password.encodeHashAsBase64 = true
 grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
 grails.plugins.springsecurity.controllerAnnotations.staticRules = [
 	'/monitoring/**': ['ROLE_ADMIN'],
-	'/quartz/**': ['ROLE_ADMIN'],
+	'/quartz/**': ['ROLE_ADMIN']
 ]
 
 //configuration for gtalk accounts
@@ -115,3 +115,9 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
 grails.plugin.cloudfoundry.username = 'sebastieng@sympatico.ca'
 grails.plugin.cloudfoundry.password = 'salut99'
 grails.plugin.cloudfoundry.appname = 'braindump'
+
+// Added by the Pusherapp plugin:
+pusherapp.host = "api.pusherapp.com"
+pusherapp.applicationId = "13164"
+pusherapp.applicationKey = "e03439ab2e03bc5ebf04"
+pusherapp.applicationSecret = "8b43a1eb77c5056f30de"

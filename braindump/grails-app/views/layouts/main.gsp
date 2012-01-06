@@ -93,6 +93,21 @@
       	white-space: pre;
       }
     </style>
+	<script src="http://js.pusher.com/1.11/pusher.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	    var pusher = new Pusher('e03439ab2e03bc5ebf04');
+
+	    var channel = pusher.subscribe('braindump');
+	    channel.bind('application', function(data) {
+	      alert(data);
+	    });
+	    
+	    <sec:ifLoggedIn>	    
+		    channel.bind('<sec:username/>', function(data) {
+				alert(data);
+		    });
+	    </sec:ifLoggedIn>	    
+	</script>
 </head>
 <body>
     <div class="topbar">
@@ -113,7 +128,7 @@
 	              <ul class="dropdown-menu">
 	                <li><g:link controller="admin">Configuration</g:link></li>
 	                <li class="divider"></li>
-	                <li><a href="#">Backup Data</a></li>
+	                <li><g:link controller="admin" action="backup">Backup Data</g:link></li>
 	                <li><a href="#">Import Data</a></li>
 	                <li class="divider"></li>
 	                <li><g:link controller="SignUp">Signup</g:link></li>

@@ -5,6 +5,21 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title><g:layoutTitle default="Brain Dump" /></title>
+	<script src="http://js.pusher.com/1.11/pusher.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	    var pusher = new Pusher('e03439ab2e03bc5ebf04');
+	
+	    var channel = pusher.subscribe('braindump');
+	    channel.bind('application', function(data) {
+	      alert(data);
+	    });
+	    
+	    <sec:ifLoggedIn>	    
+		    channel.bind('<sec:username/>', function(data) {
+				alert(data);
+		    });
+	    </sec:ifLoggedIn>	    
+	</script>
 	<r:require modules="bootstrap, jquery-mobile, application-mobile" />
 	<r:layoutResources />
 	<g:layoutHead />
