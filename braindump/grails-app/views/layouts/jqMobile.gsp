@@ -20,7 +20,7 @@
 		    });
 	    </sec:ifLoggedIn>	    
 	</script>
-	<r:require modules="application-mobile" />
+	<r:require modules="jq-mobile" />
 	<r:layoutResources />
 	<g:layoutHead />
 	<style>

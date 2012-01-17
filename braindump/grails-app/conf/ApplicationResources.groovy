@@ -23,4 +23,13 @@ modules = {
 		resource url:'js/mobile/jquery.mobile.pagination.js', disposition: 'head'
 		resource url:'css/mobile/jquery.mobile.pagination.css', disposition: 'head'
 	}
+
+	'jq-mobile' {
+		resource url:'js/jqmobi/jq.mobi.js', disposition: 'head'
+		resource url:'js/jqmobi/ui/jq.ui.js', disposition: 'head'
+	}
+
+	'application-jq-mobile' {
+		dependsOn 'jq-mobile'
+	}
 }
