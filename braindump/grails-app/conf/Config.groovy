@@ -67,7 +67,7 @@ environments {
     }
     production {
         grails.logging.jul.usebridge = false
-        grails.serverURL = "http://braindump.cloudfoundry.com"
+        grails.serverURL = "http://braindump.jelastic.servint.net"
     }
 }
 
@@ -105,13 +105,13 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
 ]
 
 //configuration for gtalk accounts
-//xmpp.autoStartup=true
-//xmpp.username="sebastien.test.application"
-//xmpp.password="\$alut9999"
-//xmpp.connection.host="talk.google.com"
-//xmpp.connection.port=5222
-//xmpp.connection.service="gmail.com"
-//xmpp.connection.SASLAuthenticationEnabled=false
+xmpp.autoStartup=true
+xmpp.username="sebastien.test.application"
+xmpp.password="\$alut9999"
+xmpp.connection.host="talk.google.com"
+xmpp.connection.port=5222
+xmpp.connection.service="gmail.com"
+xmpp.connection.SASLAuthenticationEnabled=false
 
 grails.plugin.cloudfoundry.username = 'sebastieng@sympatico.ca'
 grails.plugin.cloudfoundry.password = 'salut99'
