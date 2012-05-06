@@ -13,7 +13,7 @@ The parameter disabled (false by default) just disables the monitoring.
 //javamelody.disabled = false
 
 /*
-The parameter system-actions-enabled (false by default) enables some system actions.
+The parameter system-actions-enabled (true by default) enables some system actions.
  */
 //javamelody.'system-actions-enabled' = true
 
